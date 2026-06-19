@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+
+# ReScript build artifacts (compiled in-source)
+*.res.js
+lib/
+.bsb.lock
+
+# Env
+.env
+.env.local
+
+# Editor / OS
+.DS_Store
+*.log
