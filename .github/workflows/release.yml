@@ -47,6 +47,21 @@ jobs:
             exit 1
           fi
 
+      # Skip publishing if this exact version is already on npm (e.g. when an
+      # old tag is re-pushed / backfilled). Avoids a failed duplicate publish.
+      - name: Check if version is already published
+        id: published
+        run: |
+          NAME="$(node -p "require('./package.json').name")"
+          VERSION="$(node -p "require('./package.json').version")"
+          if npm view "$NAME@$VERSION" version >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "::notice::$NAME@$VERSION is already published — skipping publish."
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
       # `npm publish` runs prepublishOnly (rescript clean && build). Via OIDC
       # no auth token is needed and provenance is attached automatically.
-      - run: npm publish --provenance --access public
+      - if: steps.published.outputs.exists == 'false'
+        run: npm publish --provenance --access public
