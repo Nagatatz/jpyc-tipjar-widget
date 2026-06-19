@@ -1,6 +1,6 @@
 {
   "name": "jpyc-tipjar-widget",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Embeddable JPYC tip jar widget (Polygon, MetaMask) for React — built with ReScript. Supports rich and simple layout variants.",
   "license": "MIT",
   "type": "module",
