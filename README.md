@@ -2,6 +2,7 @@
 
 **Language: English (this file) | [日本語](./README.ja.md)**
 
+[![npm version](https://img.shields.io/npm/v/jpyc-tipjar-widget?logo=npm&color=cb3837)](https://www.npmjs.com/package/jpyc-tipjar-widget)
 [![Docs](https://github.com/Nagatatz/jpyc-tipjar-widget/actions/workflows/docs.yml/badge.svg)](https://github.com/Nagatatz/jpyc-tipjar-widget/actions/workflows/docs.yml)
 [![Release](https://github.com/Nagatatz/jpyc-tipjar-widget/actions/workflows/release.yml/badge.svg)](https://github.com/Nagatatz/jpyc-tipjar-widget/actions/workflows/release.yml)
 [![GitHub Sponsors](https://img.shields.io/github/sponsors/Nagatatz?logo=githubsponsors&logoColor=white&label=Sponsor&color=db61a2)](https://github.com/sponsors/Nagatatz)
