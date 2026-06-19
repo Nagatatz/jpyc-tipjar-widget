@@ -2,10 +2,10 @@ name: Docs
 
 on:
   push:
-    branches: [main]
+    branches: [master]
     paths: ['sphinx-docs/**']
   pull_request:
-    branches: [main]
+    branches: [master]
     paths: ['sphinx-docs/**']
   workflow_dispatch:
 
