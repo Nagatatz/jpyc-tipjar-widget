@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JPYC Tip Jar Widget \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-19 22:00+0900\n"
+"POT-Creation-Date: 2026-06-19 22:24+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -28,11 +28,12 @@ msgstr "変更履歴"
 msgid "Unreleased"
 msgstr "未リリース"
 
-#: ../../user/changelog.md:7 ../../user/changelog.md:27
+#: ../../user/changelog.md:7 ../../user/changelog.md:41
 msgid "Added"
 msgstr "追加"
 
 #: ../../user/changelog.md:11 ../../user/changelog.md:21
+#: ../../user/changelog.md:35
 msgid "Changed"
 msgstr "変更"
 
@@ -41,32 +42,65 @@ msgid "Fixed"
 msgstr "修正"
 
 #: ../../user/changelog.md:19
-msgid "0.1.1 (2026-06-19)"
+msgid "0.1.2 (2026-06-19)"
 msgstr ""
 
 #: ../../user/changelog.md:23
 msgid ""
-"Documentation only: add CI (Docs/Release) and GitHub Sponsors badges to "
-"the README. No code changes; the published widget is identical to 0.1.0."
-msgstr "ドキュメントのみ: README に CI（Docs/Release）と GitHub Sponsors のバッジを追加。コード変更はなく、公開されるウィジェットは 0.1.0 と同一です。"
+"Add `repository`, `homepage`, and `bugs` fields to `package.json` so the "
+"npm page links back to the source and provenance verification passes."
+msgstr "`package.json` に `repository`・`homepage`・`bugs` フィールドを追加し、npm ページからソースへリンクが張られ、provenance 検証も通るようにした。"
 
 #: ../../user/changelog.md:25
+msgid "Removed"
+msgstr "削除"
+
+#: ../../user/changelog.md:27
+msgid ""
+"Remove the internal Vite demo harness used for variant screenshots (it "
+"was never part of the published package)."
+msgstr "variant のスクリーンショット用に使っていた内部の Vite デモハーネスを削除（公開パッケージには元々含まれていない）。"
+
+#: ../../user/changelog.md:29
+msgid "Internal"
+msgstr "内部"
+
+#: ../../user/changelog.md:31
+msgid ""
+"Bump GitHub Actions to Node 24 runtimes (checkout v7, setup-node v6, "
+"setup-uv v7, upload-pages-artifact v5, deploy-pages v5, upload-artifact "
+"v7)."
+msgstr "GitHub Actions を Node 24 ランタイムに更新（checkout v7、setup-node v6、setup-uv v7、upload-pages-artifact v5、deploy-pages v5、upload-artifact v7）。"
+
+#: ../../user/changelog.md:33
+msgid "0.1.1 (2026-06-19)"
+msgstr ""
+
+#: ../../user/changelog.md:37
+msgid ""
+"Documentation only: add CI (Docs/Release) and GitHub Sponsors badges to "
+"the README. No code changes; the published widget is identical to 0.1.0."
+msgstr ""
+"ドキュメントのみ: README に CI（Docs/Release）と GitHub Sponsors "
+"のバッジを追加。コード変更はなく、公開されるウィジェットは 0.1.0 と同一です。"
+
+#: ../../user/changelog.md:39
 msgid "0.1.0"
 msgstr ""
 
-#: ../../user/changelog.md:29
+#: ../../user/changelog.md:43
 msgid "Initial release of the JPYC tip jar widget."
 msgstr "JPYC 投げ銭ウィジェットの初回リリース。"
 
-#: ../../user/changelog.md:30
+#: ../../user/changelog.md:44
 msgid "`rich` and `simple` layout variants."
 msgstr "`rich` と `simple` のレイアウト variant（バリアント）。"
 
-#: ../../user/changelog.md:31
+#: ../../user/changelog.md:45
 msgid "Server-less on-chain JPYC transfer on Polygon via MetaMask."
 msgstr "MetaMask を介した Polygon 上でのサーバーレス（資金を預からない）なオンチェーン JPYC 送金。"
 
-#: ../../user/changelog.md:32
+#: ../../user/changelog.md:46
 msgid "EIP-681 QR code fallback for mobile wallets when MetaMask is absent."
 msgstr "MetaMask がない場合の、モバイルウォレット向け EIP-681 QR コードフォールバック。"
 

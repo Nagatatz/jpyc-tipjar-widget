@@ -16,6 +16,20 @@
 
 -
 
+## 0.1.2 (2026-06-19)
+
+### Changed
+
+- Add `repository`, `homepage`, and `bugs` fields to `package.json` so the npm page links back to the source and provenance verification passes.
+
+### Removed
+
+- Remove the internal Vite demo harness used for variant screenshots (it was never part of the published package).
+
+### Internal
+
+- Bump GitHub Actions to Node 24 runtimes (checkout v7, setup-node v6, setup-uv v7, upload-pages-artifact v5, deploy-pages v5, upload-artifact v7).
+
 ## 0.1.1 (2026-06-19)
 
 ### Changed
