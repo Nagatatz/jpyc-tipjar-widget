@@ -6,6 +6,7 @@
 [![Docs](https://github.com/Nagatatz/jpyc-tipjar-widget/actions/workflows/docs.yml/badge.svg)](https://github.com/Nagatatz/jpyc-tipjar-widget/actions/workflows/docs.yml)
 [![Release](https://github.com/Nagatatz/jpyc-tipjar-widget/actions/workflows/release.yml/badge.svg)](https://github.com/Nagatatz/jpyc-tipjar-widget/actions/workflows/release.yml)
 [![GitHub Sponsors](https://img.shields.io/github/sponsors/Nagatatz?logo=githubsponsors&logoColor=white&label=Sponsor&color=db61a2)](https://github.com/sponsors/Nagatatz)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
 > このファイルは英語版 [`README.md`](./README.md) の翻訳です。`README.md` が正（canonical）であり、英語版を更新した際は本ファイルも同じ変更内で更新します。
 

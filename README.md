@@ -6,6 +6,7 @@
 [![Docs](https://github.com/Nagatatz/jpyc-tipjar-widget/actions/workflows/docs.yml/badge.svg)](https://github.com/Nagatatz/jpyc-tipjar-widget/actions/workflows/docs.yml)
 [![Release](https://github.com/Nagatatz/jpyc-tipjar-widget/actions/workflows/release.yml/badge.svg)](https://github.com/Nagatatz/jpyc-tipjar-widget/actions/workflows/release.yml)
 [![GitHub Sponsors](https://img.shields.io/github/sponsors/Nagatatz?logo=githubsponsors&logoColor=white&label=Sponsor&color=db61a2)](https://github.com/sponsors/Nagatatz)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
 A **JPYC (Japanese-yen stablecoin) tip jar widget** you can embed in a blog post or
 any React page. Users send JPYC on the Polygon network directly to your receiving
