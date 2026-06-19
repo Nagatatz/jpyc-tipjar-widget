@@ -2,6 +2,9 @@
 _build/
 _build_ja/
 
+# Compiled gettext catalogs (generated from .po at build time)
+*.mo
+
 # Python virtualenv (uv)
 .venv/
 __pycache__/
