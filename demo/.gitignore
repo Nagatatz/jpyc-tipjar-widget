@@ -1,0 +1,8 @@
+# Dependencies
+node_modules/
+
+# Vite build output
+dist/
+
+# Logs
+*.log

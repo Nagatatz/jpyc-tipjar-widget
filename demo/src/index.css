@@ -1,0 +1,4 @@
+@import "tailwindcss";
+
+/* ウィジェット本体（widget/src）のクラスを Tailwind の生成対象に含める */
+@source "../../src";
