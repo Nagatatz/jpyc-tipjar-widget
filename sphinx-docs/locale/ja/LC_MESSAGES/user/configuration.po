@@ -1,0 +1,187 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nagatatz
+# This file is distributed under the same license as the JPYC Tip Jar Widget
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: JPYC Tip Jar Widget \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-19 19:29+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../user/configuration.md:1
+msgid "Configuration"
+msgstr "設定"
+
+#: ../../user/configuration.md:3
+msgid ""
+"The widget is configured through component props and host-app environment"
+" variables."
+msgstr "このウィジェットは、コンポーネントのプロップとホストアプリの環境変数によって設定します。"
+
+#: ../../user/configuration.md:5
+msgid "Props"
+msgstr "プロップ"
+
+#: ../../user/configuration.md
+msgid "Prop"
+msgstr "プロップ"
+
+#: ../../user/configuration.md
+msgid "Type"
+msgstr "型"
+
+#: ../../user/configuration.md
+msgid "Default"
+msgstr "既定"
+
+#: ../../user/configuration.md
+msgid "Description"
+msgstr "説明"
+
+#: ../../user/configuration.md
+msgid "`recipientAddress`"
+msgstr "`recipientAddress`"
+
+#: ../../user/configuration.md
+msgid "`string` (optional)"
+msgstr "`string`（任意）"
+
+#: ../../user/configuration.md
+msgid "env var"
+msgstr "環境変数"
+
+#: ../../user/configuration.md
+msgid ""
+"Receiving wallet address. Falls back to "
+"`NEXT_PUBLIC_TIPJAR_RECIPIENT_ADDRESS` when omitted."
+msgstr "受取側のウォレットアドレス。省略した場合は `NEXT_PUBLIC_TIPJAR_RECIPIENT_ADDRESS` にフォールバックします。"
+
+#: ../../user/configuration.md
+msgid "`variant`"
+msgstr "`variant`"
+
+#: ../../user/configuration.md
+msgid "`\"rich\" | \"simple\"` (optional)"
+msgstr "`\"rich\" | \"simple\"`（任意）"
+
+#: ../../user/configuration.md
+msgid "`\"rich\"`"
+msgstr "`\"rich\"`"
+
+#: ../../user/configuration.md
+msgid ""
+"Visual theme. `rich` is a decorative rose-gradient design with emoji; "
+"`simple` is a plain design with a white background and gray border."
+msgstr "見た目のテーマ。`rich` は絵文字付きの装飾的なローズグラデーションのデザイン、`simple` は白背景にグレーの枠線を持つシンプルなデザインです。"
+
+#: ../../user/configuration.md:12
+msgid "Environment variables"
+msgstr "環境変数"
+
+#: ../../user/configuration.md:14
+msgid ""
+"Set these in the host app (inlined at build time as "
+"`process.env.NEXT_PUBLIC_*`):"
+msgstr "これらはホストアプリで設定します（ビルド時に `process.env.NEXT_PUBLIC_*` としてインライン展開されます）。"
+
+#: ../../user/configuration.md
+msgid "Variable"
+msgstr "変数"
+
+#: ../../user/configuration.md
+msgid "Required"
+msgstr "必須"
+
+#: ../../user/configuration.md
+msgid "`NEXT_PUBLIC_ALCHEMY_API_KEY`"
+msgstr "`NEXT_PUBLIC_ALCHEMY_API_KEY`"
+
+#: ../../user/configuration.md
+msgid "Yes"
+msgstr "はい"
+
+#: ../../user/configuration.md
+msgid "Alchemy API key for Polygon mainnet."
+msgstr "Polygon メインネット用の Alchemy API キー。"
+
+#: ../../user/configuration.md
+msgid "`NEXT_PUBLIC_TIPJAR_RECIPIENT_ADDRESS`"
+msgstr "`NEXT_PUBLIC_TIPJAR_RECIPIENT_ADDRESS`"
+
+#: ../../user/configuration.md
+msgid "When `recipientAddress` prop is omitted"
+msgstr "`recipientAddress` プロップを省略した場合"
+
+#: ../../user/configuration.md
+msgid "Wallet address that receives tips."
+msgstr "投げ銭を受け取るウォレットアドレス。"
+
+#: ../../user/configuration.md:21
+msgid "Network and token"
+msgstr "ネットワークとトークン"
+
+#: ../../user/configuration.md:23
+msgid "These are fixed by the widget and not configurable:"
+msgstr "以下はウィジェットによって固定されており、変更できません。"
+
+#: ../../user/configuration.md
+msgid "Item"
+msgstr "項目"
+
+#: ../../user/configuration.md
+msgid "Value"
+msgstr "値"
+
+#: ../../user/configuration.md
+msgid "Chain"
+msgstr "チェーン"
+
+#: ../../user/configuration.md
+msgid "Polygon mainnet (chainId 137)"
+msgstr "Polygon メインネット（chainId 137）"
+
+#: ../../user/configuration.md
+msgid "Token"
+msgstr "トークン"
+
+#: ../../user/configuration.md
+msgid ""
+"JPYC (money-transfer-business type) "
+"`0xE7C3D8C9a439feDe00D2600032D5dB0Be71C3c29`"
+msgstr "JPYC（資金移動業タイプ）`0xE7C3D8C9a439feDe00D2600032D5dB0Be71C3c29`"
+
+#: ../../user/configuration.md
+msgid "QR scheme"
+msgstr "QR スキーム"
+
+#: ../../user/configuration.md
+msgid "[EIP-681](https://eips.ethereum.org/EIPS/eip-681)"
+msgstr "[EIP-681](https://eips.ethereum.org/EIPS/eip-681)"
+
+#~ msgid "Settings"
+#~ msgstr ""
+
+#~ msgid "Setting"
+#~ msgstr ""
+
+#~ msgid "`example_setting`"
+#~ msgstr ""
+
+#~ msgid "`true`"
+#~ msgstr ""
+
+#~ msgid "Description of the setting"
+#~ msgstr ""
+

@@ -1,0 +1,44 @@
+name: バグ報告
+description: 不具合を報告する
+labels: [bug]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: 概要
+      description: 何が起きていますか？
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 再現手順
+      description: |
+        手順を箇条書きで記述してください
+      placeholder: |
+        1. ...
+        2. ...
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期待される挙動
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 実際の挙動
+      description: エラーログや画面キャプチャがあれば添付
+  - type: textarea
+    id: environment
+    attributes:
+      label: 環境
+      description: |
+        - OS:
+        - Node.js / Python / 他バージョン:
+        - Claude Code バージョン:
+    validations:
+      required: true

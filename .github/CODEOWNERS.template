@@ -1,0 +1,16 @@
+# CODEOWNERS — 配布先で {{TEAM}} を実チーム / GitHub user に置換すること
+# 参考: https://docs.github.com/en/repositories/managing-your-repositories-settings-and-features/customizing-your-repository/about-code-owners
+
+# デフォルトオーナー
+*               {{TEAM}}
+
+# Claude Code 関連の変更は全員の承認を必須にしたい場合は以下を有効化
+# .claude/        {{TEAM}}
+# CLAUDE.md       {{TEAM}}
+
+# ドキュメント
+docs/           {{TEAM}}
+sphinx-docs/    {{TEAM}}
+
+# CI / 設定
+.github/        {{TEAM}}

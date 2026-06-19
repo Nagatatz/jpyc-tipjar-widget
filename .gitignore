@@ -13,3 +13,9 @@ lib/
 # Editor / OS
 .DS_Store
 *.log
+.idea/
+
+# Claude Code (personal / machine-local)
+CLAUDE.local.md
+.claude/settings.local.json
+.claude/worktrees/

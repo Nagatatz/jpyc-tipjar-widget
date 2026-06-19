@@ -1,0 +1,48 @@
+name: Quality Measurement
+
+on:
+  # 週次実行は配布先でコメントアウトを外して有効化する (API コストに注意)
+  # schedule:
+  #   - cron: '0 0 * * 1'  # 毎週月曜日 UTC 0:00
+  workflow_dispatch:  # 手動トリガーは常時可能
+
+permissions:
+  contents: read
+
+jobs:
+  measure:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Claude Code
+        run: curl -fsSL https://claude.ai/install.sh | bash
+
+      - name: Install yq
+        run: |
+          sudo wget -qO /usr/local/bin/yq \
+            https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+          sudo chmod +x /usr/local/bin/yq
+
+      - name: Run evaluations
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          if [ -z "${ANTHROPIC_API_KEY:-}" ]; then
+            echo "ERROR: ANTHROPIC_API_KEY secret not configured"
+            exit 1
+          fi
+          mkdir -p quality-reports
+          for dataset in quality-datasets/*.yaml; do
+            [ -f "$dataset" ] || continue
+            echo "Evaluating: $dataset"
+            bash scripts/evaluate-skills.sh "$dataset" || true
+          done
+
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: quality-reports-${{ github.run_id }}
+          path: quality-reports/
+          retention-days: 90

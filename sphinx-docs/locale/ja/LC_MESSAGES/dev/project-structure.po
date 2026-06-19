@@ -1,0 +1,61 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nagatatz
+# This file is distributed under the same license as the JPYC Tip Jar Widget
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: JPYC Tip Jar Widget \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-19 19:29+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../dev/project-structure.md:1
+msgid "Project Structure"
+msgstr "プロジェクト構成"
+
+#: ../../dev/project-structure.md:3
+msgid "Top-Level Layout"
+msgstr "トップレベル構成"
+
+#: ../../dev/project-structure.md:15
+msgid "Source Code Organization"
+msgstr "ソースコード構成"
+
+#: ../../dev/project-structure.md:27
+msgid ""
+"ReScript compiles in-source, so each `.res` file has a sibling `.res.js`."
+" See [Architecture](architecture.md) for the responsibility of each "
+"layer."
+msgstr "ReScript はインソースコンパイルされるため、各 `.res` ファイルには隣接する `.res.js` が存在します。各レイヤーの責務については [アーキテクチャ](architecture.md) を参照してください。"
+
+#: ../../dev/project-structure.md:30
+msgid "Bilingual documentation"
+msgstr "バイリンガルドキュメント"
+
+#: ../../dev/project-structure.md:32
+msgid ""
+"Documentation is bilingual (English + Japanese). English is the source of"
+" truth and Japanese follows in the same change:"
+msgstr "ドキュメントはバイリンガル（英語 + 日本語）です。英語が正（正本）であり、日本語は同一の変更内で従って更新します:"
+
+#: ../../dev/project-structure.md:35
+msgid "`README.md` (English, canonical) ↔ `README.ja.md` (Japanese)"
+msgstr "`README.md`（英語、正本）↔ `README.ja.md`（日本語）"
+
+#: ../../dev/project-structure.md:36
+msgid ""
+"`sphinx-docs/` English sources ↔ `sphinx-docs/locale/ja/` `.po` "
+"translations (run `make update-po` after editing the English sources)"
+msgstr "`sphinx-docs/` の英語ソース ↔ `sphinx-docs/locale/ja/` の `.po` 翻訳（英語ソースを編集した後に `make update-po` を実行してください）"
+

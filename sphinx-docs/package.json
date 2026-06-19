@@ -1,0 +1,8 @@
+{
+  "name": "jpyc-tipjar-widget-docs",
+  "private": true,
+  "description": "Node.js tooling for jpyc-tipjar-widget Sphinx docs (pa11y-ci, pagefind).",
+  "devDependencies": {
+    "pa11y-ci": "^4.0.0"
+  }
+}

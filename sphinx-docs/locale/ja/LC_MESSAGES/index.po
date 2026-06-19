@@ -1,0 +1,76 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nagatatz
+# This file is distributed under the same license as the JPYC Tip Jar Widget
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: JPYC Tip Jar Widget \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-19 18:57+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../index.md:1
+msgid "JPYC Tip Jar Widget"
+msgstr "JPYC Tip Jar Widget"
+
+#: ../../index.md:3
+msgid ""
+"Embeddable JPYC tip jar widget (Polygon, MetaMask) for React â built "
+"with ReScript. Supports rich and simple layout variants."
+msgstr "React 向けの埋め込み可能な JPYC 投げ銭ウィジェット（Polygon、MetaMask）。ReScript で構築されています。rich と simple のレイアウト variant（バリアント）に対応しています。"
+
+#: ../../index.md:8
+msgid "User Guide"
+msgstr "ユーザーガイド"
+
+#: ../../index.md:12
+msgid "Learn how to install, configure, and use the project."
+msgstr "プロジェクトのインストール、設定、使い方を学べます。"
+
+#: ../../index.md:15
+msgid "[Get started →](user/index.md)"
+msgstr "[はじめる →](user/index.md)"
+
+#: ../../index.md:18
+msgid "Developer Guide"
+msgstr "開発者ガイド"
+
+#: ../../index.md:22
+msgid "Understand the architecture, build the project, and contribute."
+msgstr "アーキテクチャを理解し、プロジェクトをビルドし、コントリビュートできます。"
+
+#: ../../index.md:25
+msgid "[Read more →](dev/index.md)"
+msgstr "[詳しく読む →](dev/index.md)"
+
+#: ../../index.md:29
+msgid "Quick Links"
+msgstr "クイックリンク"
+
+#: ../../index.md:31
+msgid "[Installation](user/installation.md)"
+msgstr "[インストール](user/installation.md)"
+
+#: ../../index.md:32
+msgid "[Quick Start](user/quickstart.md)"
+msgstr "[クイックスタート](user/quickstart.md)"
+
+#: ../../index.md:33
+msgid "[Configuration](user/configuration.md)"
+msgstr "[設定](user/configuration.md)"
+
+#: ../../index.md:34
+msgid "[Changelog](user/changelog.md)"
+msgstr "[変更履歴](user/changelog.md)"
+

@@ -13,6 +13,7 @@
     "src/**/*.res",
     "src/**/*.resi",
     "README.md",
+    "README.ja.md",
     "LICENSE"
   ],
   "scripts": {

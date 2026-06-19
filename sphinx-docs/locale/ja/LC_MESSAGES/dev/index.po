@@ -1,0 +1,66 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nagatatz
+# This file is distributed under the same license as the JPYC Tip Jar Widget
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: JPYC Tip Jar Widget \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-19 18:57+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../dev/index.md:1
+msgid "Developer Guide"
+msgstr "開発者ガイド"
+
+#: ../../dev/index.md:3
+msgid "This section covers everything you need to contribute to the project."
+msgstr "このセクションでは、プロジェクトにコントリビュートするために必要なすべてを解説します。"
+
+#: ../../dev/index.md:5
+msgid "Getting Started"
+msgstr "はじめに"
+
+#: ../../dev/index.md:7
+msgid "[Development Setup](setup.md) — Set up your development environment"
+msgstr "[開発環境セットアップ](setup.md) — 開発環境を構築する"
+
+#: ../../dev/index.md:8
+msgid "[Building](building.md) — Build and run the project"
+msgstr "[ビルド](building.md) — プロジェクトをビルドして実行する"
+
+#: ../../dev/index.md:10
+msgid "Understanding the Codebase"
+msgstr "コードベースを理解する"
+
+#: ../../dev/index.md:12
+msgid "[Architecture](architecture.md) — How the project is structured"
+msgstr "[アーキテクチャ](architecture.md) — プロジェクトの構造"
+
+#: ../../dev/index.md:13
+msgid ""
+"[Project Structure](project-structure.md) — Source code layout and key "
+"files"
+msgstr "[プロジェクト構成](project-structure.md) — ソースコードのレイアウトと主要ファイル"
+
+#: ../../dev/index.md:15
+msgid "Contributing"
+msgstr "コントリビュート"
+
+#: ../../dev/index.md:17
+msgid ""
+"[Contributing Guide](contributing.md) — Workflow, conventions, and PR "
+"process"
+msgstr "[コントリビュートガイド](contributing.md) — ワークフロー、規約、PR プロセス"
+

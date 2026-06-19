@@ -1,40 +1,42 @@
 # jpyc-tipjar-widget
 
-ブログ記事や任意の React ページに組み込める、**JPYC（日本円ステーブルコイン）投げ銭ウィジェット**です。
-ユーザーは MetaMask 経由で Polygon ネットワーク上の JPYC を受取アドレスへ直接送金します。
-**サーバーは資金を一切預かりません**（オンチェーン直接送金）。
+**Language: English (this file) | [日本語](./README.ja.md)**
 
-ReScript で実装され、コンパイル済みの React コンポーネント（`.res.js`）として npm 配布します。
+A **JPYC (Japanese-yen stablecoin) tip jar widget** you can embed in a blog post or
+any React page. Users send JPYC on the Polygon network directly to your receiving
+address via MetaMask. **The server never custodies funds** (on-chain direct transfer).
 
-MetaMask が未インストールの環境では、EIP-681 形式の QR コードと受取アドレスを
-フォールバック表示し、モバイルウォレット（MetaMask Mobile, Rainbow など）で
-読み取って送金できます。
+Implemented in ReScript and distributed on npm as compiled React components (`.res.js`).
 
-## 特長
+When MetaMask is not installed, the widget falls back to an EIP-681 QR code plus the
+receiving address, which mobile wallets (MetaMask Mobile, Rainbow, etc.) can scan to
+complete the transfer.
 
-- **2 つの見た目（variant）**: `rich`（rose グラデーション + 絵文字の装飾的デザイン）と
-  `simple`（白背景・グレー枠・絵文字最小化の素朴なデザイン）を選べます。
-- **サーバーレス送金**: オンチェーンで完結。受取は任意のウォレットアドレス。
-- **QR フォールバック**: MetaMask 拡張機能が無くてもモバイルウォレットで送金可能。
+## Features
 
-## 対応ウォレット / チェーン
+- **Two visual variants**: `rich` (decorative rose-gradient design with emoji) and
+  `simple` (plain design — white background, gray border, minimal emoji).
+- **Serverless transfers**: settled fully on-chain; the recipient is any wallet address.
+- **QR fallback**: transfers work from a mobile wallet even without the MetaMask extension.
 
-- ウォレット: MetaMask 拡張機能（メイン）／ EIP-681 対応モバイルウォレット（QR フォールバック）
-- チェーン: Polygon mainnet (chainId = 137)
-- トークン: JPYC（資金移動業型 / `0xE7C3D8C9a439feDe00D2600032D5dB0Be71C3c29`）
+## Supported wallets / chains
 
-## インストール
+- Wallets: MetaMask extension (primary) / EIP-681-capable mobile wallets (QR fallback)
+- Chain: Polygon mainnet (chainId = 137)
+- Token: JPYC (money-transfer-business type / `0xE7C3D8C9a439feDe00D2600032D5dB0Be71C3c29`)
+
+## Installation
 
 ```bash
 pnpm add jpyc-tipjar-widget
-# react / react-dom は peerDependencies（ホスト側に既存のものを使用）
+# react / react-dom are peerDependencies (the host app provides them)
 ```
 
-`viem` と `qrcode.react` は本パッケージの依存として自動的に入ります。
+`viem` and `qrcode.react` are installed automatically as dependencies of this package.
 
-## 使い方
+## Usage
 
-### JS / TS（React）から
+### From JS / TS (React)
 
 ```jsx
 import TipJar from "jpyc-tipjar-widget"
@@ -42,19 +44,19 @@ import TipJar from "jpyc-tipjar-widget"
 export default function Article() {
   return (
     <article>
-      {/* rich（既定） */}
+      {/* rich (default) */}
       <TipJar />
 
-      {/* simple レイアウト + 受取アドレスを明示 */}
+      {/* simple layout + explicit recipient address */}
       <TipJar variant="simple" recipientAddress="0x..." />
     </article>
   )
 }
 ```
 
-### ReScript から
+### From ReScript
 
-ReScript プロジェクトでは binding を 1 つ用意して `default` export を取り込みます。
+In a ReScript project, declare one binding to import the `default` export.
 
 ```rescript
 @module("jpyc-tipjar-widget") @react.component
@@ -67,95 +69,96 @@ let default = make
 ```
 
 ```rescript
-// 利用側
+// call site
 <TipJarWidget variant=#simple />
 ```
 
-### プロップス
+### Props
 
-| プロップ | 型 | 既定 | 説明 |
-|---------|-----|------|------|
-| `recipientAddress` | `string`（任意） | 環境変数 | 受取ウォレットアドレス。省略時は `NEXT_PUBLIC_TIPJAR_RECIPIENT_ADDRESS` を使用 |
-| `variant` | `"rich" \| "simple"`（任意） | `"rich"` | 見た目テーマ |
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `recipientAddress` | `string` (optional) | env var | Receiving wallet address. Falls back to `NEXT_PUBLIC_TIPJAR_RECIPIENT_ADDRESS` when omitted |
+| `variant` | `"rich" \| "simple"` (optional) | `"rich"` | Visual theme |
 
-## 環境変数
+## Environment variables
 
-利用側（ホスト）アプリのビルド時に `process.env.NEXT_PUBLIC_*` がインライン展開されます。
-ホストの `.env.local` に以下を設定してください。
+`process.env.NEXT_PUBLIC_*` values are inlined at the host app's build time.
+Set the following in the host's `.env.local`:
 
 ```
 NEXT_PUBLIC_ALCHEMY_API_KEY=...
 NEXT_PUBLIC_TIPJAR_RECIPIENT_ADDRESS=0x...
 ```
 
-- `NEXT_PUBLIC_ALCHEMY_API_KEY`: Alchemy で発行した Polygon mainnet 用の API Key
-- `NEXT_PUBLIC_TIPJAR_RECIPIENT_ADDRESS`: 投げ銭を受け取るウォレットアドレス
+- `NEXT_PUBLIC_ALCHEMY_API_KEY`: an Alchemy API key for Polygon mainnet
+- `NEXT_PUBLIC_TIPJAR_RECIPIENT_ADDRESS`: the wallet address that receives tips
 
-サンプルは `.env.local.example` を参照。
+See `.env.local.example` for a sample.
 
-## Tailwind CSS について
+## About Tailwind CSS
 
-本ウィジェットは Tailwind のユーティリティクラスでスタイリングされています。
-利用側が Tailwind を使う場合、**ウィジェットのクラスもスキャン対象に含めてください**。
+This widget is styled with Tailwind utility classes. If the host app uses Tailwind,
+**include the widget's classes in the scan targets** as well.
 
 ```js
-// tailwind.config.js（利用側）
+// tailwind.config.js (host app)
 module.exports = {
   content: [
     './src/**/*.{js,jsx,res.js}',
-    './node_modules/jpyc-tipjar-widget/**/*.js', // ← 追加
+    './node_modules/jpyc-tipjar-widget/**/*.js', // <- add this
   ],
 }
 ```
 
-## QR フォールバックの仕様
+## QR fallback specification
 
-- スキーム: [EIP-681](https://eips.ethereum.org/EIPS/eip-681)
-- 形式: `ethereum:<JPYC>@137/transfer?address=<recipient>&uint256=<amount-wei>`
-- 金額の有無:
-  - プリセット選択中 / カスタム入力済み: `uint256` クエリ付き
-  - 未入力: クエリなし（ウォレット側で入力）
-- 描画: `qrcode.react` の `QRCodeSVG`（純 SVG, SSR セーフ）
+- Scheme: [EIP-681](https://eips.ethereum.org/EIPS/eip-681)
+- Format: `ethereum:<JPYC>@137/transfer?address=<recipient>&uint256=<amount-wei>`
+- Amount handling:
+  - Preset selected / custom amount entered: includes the `uint256` query
+  - Not entered: no query (the wallet prompts for the amount)
+- Rendering: `QRCodeSVG` from `qrcode.react` (pure SVG, SSR-safe)
 
-## ディレクトリ構成
+## Directory layout
 
 ```
 src/
-├── Entry.res          # 公開エントリ（default export, ~variant 受け口）
-├── Theme.res          # variant ごとのスタイル集約
-├── bindings/          # 外部ライブラリ最小バインディング（Viem / BrowserEthereum / QRCode / Clipboard）
-├── domain/            # 純粋な値・ロジック（Chain / Jpyc / TipAmount / PaymentUri）
-├── effects/           # 副作用（WalletProvider 抽象 / MetaMaskProvider）
-└── components/        # UI（TipJar / AmountSelector / ConnectButton / TxStatus / QrFallback）
+├── Entry.res          # public entry (default export, ~variant prop)
+├── Theme.res          # styles aggregated per variant
+├── bindings/          # minimal bindings to external libs (Viem / BrowserEthereum / QRCode / Clipboard)
+├── domain/            # pure values and logic (Chain / Jpyc / TipAmount / PaymentUri)
+├── effects/           # side effects (WalletProvider abstraction / MetaMaskProvider)
+└── components/        # UI (TipJar / AmountSelector / ConnectButton / TxStatus / QrFallback)
 ```
 
-## 開発
+## Development
 
 ```bash
 pnpm install
-pnpm build      # rescript build（in-source で .res.js を生成）
-pnpm clean      # 生成物を削除
+pnpm build      # rescript build (emits .res.js in-source)
+pnpm clean      # remove build artifacts
 ```
 
-## 公開（npm publish）手順
+## Publishing (npm publish)
 
 ```bash
-# 1. バージョンを更新（package.json の version）
-# 2. ビルド込みで publish（prepublishOnly が clean + build を実行）
-npm publish --access public   # 初回（public スコープ）
+# 1. Bump the version (package.json `version`)
+# 2. Publish with a build (prepublishOnly runs clean + build)
+npm publish --access public   # first time (public scope)
 ```
 
-`files` 指定によりコンパイル済み `.res.js` と `.res` ソースが同梱されます。
+The `files` field bundles the compiled `.res.js` and the `.res` sources.
 
-## 注意事項：旧 JPYC との混同に注意
+## Note: do not confuse with legacy JPYC
 
-以下のアドレスは**別物**です。誤って使用しないでください。
+The following addresses are **different tokens**. Do not use them by mistake.
 
-- `0x431D5dfF03120AFA4bDf332c61A6e1766eF37BDB` — 旧 JPYC v2 → JPYC Prepaid にリブランド済み
+- `0x431D5dfF03120AFA4bDf332c61A6e1766eF37BDB` — former JPYC v2, rebranded to JPYC Prepaid
 - `0x2370f9d504c7a6E775bf6E14B3F12846b594cD53` — v1 (Ethereum)
 
-本ウィジェットは正式な資金移動業型 JPYC（`0xE7C3D8C9a439feDe00D2600032D5dB0Be71C3c29`）のみを対象とします。
+This widget targets only the official money-transfer-business JPYC
+(`0xE7C3D8C9a439feDe00D2600032D5dB0Be71C3c29`).
 
-## ライセンス
+## License
 
 MIT

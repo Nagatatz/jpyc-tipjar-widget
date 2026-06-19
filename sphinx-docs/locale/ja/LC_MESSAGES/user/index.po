@@ -1,0 +1,54 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nagatatz
+# This file is distributed under the same license as the JPYC Tip Jar Widget
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: JPYC Tip Jar Widget \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-19 18:57+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../user/index.md:1
+msgid "User Guide"
+msgstr "ユーザーガイド"
+
+#: ../../user/index.md:3
+msgid "Everything you need to get started with JPYC Tip Jar Widget."
+msgstr "JPYC Tip Jar Widget を使い始めるために必要なすべてをまとめています。"
+
+#: ../../user/index.md:5
+msgid "Getting Started"
+msgstr "はじめに"
+
+#: ../../user/index.md:7
+msgid "[Installation](installation.md) — Install and set up"
+msgstr "[インストール](installation.md) — インストールとセットアップ"
+
+#: ../../user/index.md:8
+msgid "[Quick Start](quickstart.md) — Your first steps"
+msgstr "[クイックスタート](quickstart.md) — はじめの一歩"
+
+#: ../../user/index.md:10
+msgid "Reference"
+msgstr "リファレンス"
+
+#: ../../user/index.md:12
+msgid "[Configuration](configuration.md) — Settings and options"
+msgstr "[設定](configuration.md) — 設定とオプション"
+
+#: ../../user/index.md:13
+msgid "[Changelog](changelog.md) — Release notes"
+msgstr "[変更履歴](changelog.md) — リリースノート"
+

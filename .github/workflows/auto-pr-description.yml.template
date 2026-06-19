@@ -1,0 +1,53 @@
+name: Auto PR Description
+
+# PR が opened されたとき、Claude Code CLI (claude -p) を非対話モードで実行し、
+# diff から PR description を自動生成して PR 本文に書き込む。
+#
+# 前提:
+#   gh secret set ANTHROPIC_API_KEY  # GitHub repo に API キーを登録
+#
+# 有効化:
+#   mv auto-pr-description.yml.template auto-pr-description.yml
+#
+# 注意:
+#   PR を新規作成すると description が上書きされる。手動で書いた内容は保持されない。
+#   description が既に詳細にある PR では skip するロジックを追加する余地あり。
+
+on:
+  pull_request:
+    types: [opened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  describe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Claude Code
+        run: |
+          curl -fsSL https://claude.ai/install.sh | bash
+          echo "$HOME/.claude/bin" >> "$GITHUB_PATH"
+
+      - name: Generate PR description
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          # diff の概要を取得
+          diff_summary=$(git diff origin/${{ github.base_ref }}...HEAD --stat | tail -50)
+
+          # claude -p で PR description を生成
+          desc=$(echo "$diff_summary" | claude -p "以下の git diff --stat を見て、簡潔な PR description を生成してください。フォーマット:\n## 概要\n(1-2 文)\n## 主要変更点\n(3-5 個の bullet)\n## 動作確認\n(チェックボックス)" 2>/dev/null || echo "")
+
+          if [ -n "$desc" ]; then
+            gh pr edit ${{ github.event.pull_request.number }} --body "$desc"
+            echo "PR description updated."
+          else
+            echo "Failed to generate description; skipping."
+          fi
+        shell: bash

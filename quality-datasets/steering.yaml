@@ -1,0 +1,56 @@
+target: steering
+type: skill
+description: steering skill の auto-invoke を評価するデータセット。コード変更を伴う作業で発火し、軽微変更や別目的の要求では発火しないことを確認する
+cases:
+  # ───── 発火すべきケース（true-positive 確認） ─────
+  - id: 1
+    prompt: "ログイン画面に2要素認証を追加して"
+    expected_invocation: steering
+    notes: 新機能追加はコード変更を伴うため steering ワークフロー必須
+
+  - id: 2
+    prompt: "この一覧が重複表示されるバグを直したい"
+    expected_invocation: steering
+    notes: バグ修正もコード変更、requirements/tasklist が必要
+
+  - id: 3
+    prompt: "OPCallResultPanel をリファクタリングしたい"
+    expected_invocation: steering
+    notes: リファクタリングもコード変更、steering 対象
+
+  - id: 4
+    prompt: "新しい集計 API を実装したいんだけど"
+    expected_invocation: steering
+    notes: 実装着手前にステアリングを切るべき典型シナリオ
+
+  - id: 5
+    prompt: "通知機能を作りたい。まず何から始める？"
+    expected_invocation: steering
+    notes: 機能追加の起点、計画フェーズへ誘導すべき
+
+  # ───── 発火すべきでないケース（false-positive 検出） ─────
+  - id: 6
+    prompt: "READMEのタイポを1文字直して"
+    expected_invocation: none
+    notes: 明らかに軽微な修正、ステアリング省略可（steering-workflow.md 例外条項）
+
+  - id: 7
+    prompt: "git のログを見せて"
+    expected_invocation: none
+    notes: 単純な参照操作、コード変更なし
+
+  - id: 8
+    prompt: "requirements.md の品質をレビューして"
+    expected_invocation: review-docs
+    notes: ドキュメント品質レビューは review-docs、steering ではない
+
+  - id: 9
+    prompt: "今の変更をコミットして"
+    expected_invocation: git-workflow
+    notes: コミット操作は git-workflow、計画ワークフローではない
+
+  # ───── エッジケース ─────
+  - id: 10
+    prompt: "設定ファイルのポート番号を3000から8080に変えて"
+    expected_invocation: none
+    notes: 1行の設定変更は軽微、ステアリング省略可。判断が割れるグレーケース

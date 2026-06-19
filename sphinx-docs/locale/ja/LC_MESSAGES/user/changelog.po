@@ -1,0 +1,62 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nagatatz
+# This file is distributed under the same license as the JPYC Tip Jar Widget
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: JPYC Tip Jar Widget \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-19 19:29+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../user/changelog.md:1
+msgid "Changelog"
+msgstr "変更履歴"
+
+#: ../../user/changelog.md:3
+msgid "Unreleased"
+msgstr "未リリース"
+
+#: ../../user/changelog.md:7 ../../user/changelog.md:21
+msgid "Added"
+msgstr "追加"
+
+#: ../../user/changelog.md:11
+msgid "Changed"
+msgstr "変更"
+
+#: ../../user/changelog.md:15
+msgid "Fixed"
+msgstr "修正"
+
+#: ../../user/changelog.md:19
+msgid "0.1.0"
+msgstr ""
+
+#: ../../user/changelog.md:23
+msgid "Initial release of the JPYC tip jar widget."
+msgstr "JPYC 投げ銭ウィジェットの初回リリース。"
+
+#: ../../user/changelog.md:24
+msgid "`rich` and `simple` layout variants."
+msgstr "`rich` と `simple` のレイアウト variant（バリアント）。"
+
+#: ../../user/changelog.md:25
+msgid "Server-less on-chain JPYC transfer on Polygon via MetaMask."
+msgstr "MetaMask を介した Polygon 上でのサーバーレス（資金を預からない）なオンチェーン JPYC 送金。"
+
+#: ../../user/changelog.md:26
+msgid "EIP-681 QR code fallback for mobile wallets when MetaMask is absent."
+msgstr "MetaMask がない場合の、モバイルウォレット向け EIP-681 QR コードフォールバック。"
+

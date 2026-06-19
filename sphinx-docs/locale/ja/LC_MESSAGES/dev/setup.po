@@ -1,0 +1,106 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nagatatz
+# This file is distributed under the same license as the JPYC Tip Jar Widget
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: JPYC Tip Jar Widget \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-19 19:29+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../dev/setup.md:1
+msgid "Development Setup"
+msgstr "開発環境セットアップ"
+
+#: ../../dev/setup.md:3
+msgid "Prerequisites"
+msgstr "前提条件"
+
+#: ../../dev/setup.md
+msgid "Requirement"
+msgstr "要件"
+
+#: ../../dev/setup.md
+msgid "Version"
+msgstr "バージョン"
+
+#: ../../dev/setup.md
+msgid "Note"
+msgstr "備考"
+
+#: ../../dev/setup.md
+msgid "[uv](https://docs.astral.sh/uv/)"
+msgstr ""
+
+#: ../../dev/setup.md
+msgid "0.5+"
+msgstr ""
+
+#: ../../dev/setup.md
+msgid "Python package management and virtual environments"
+msgstr "Python のパッケージ管理と仮想環境"
+
+#: ../../dev/setup.md
+msgid "Python"
+msgstr ""
+
+#: ../../dev/setup.md
+msgid "3.12+"
+msgstr ""
+
+#: ../../dev/setup.md
+msgid "Installed automatically by uv"
+msgstr "uv によって自動的にインストールされます"
+
+#: ../../dev/setup.md
+msgid "Node.js"
+msgstr ""
+
+#: ../../dev/setup.md
+msgid "24+"
+msgstr ""
+
+#: ../../dev/setup.md
+msgid "Used to generate the Pagefind search index"
+msgstr "Pagefind の検索インデックス生成に使用します"
+
+#: ../../dev/setup.md:11
+msgid "Install uv"
+msgstr "uv のインストール"
+
+#: ../../dev/setup.md:24
+msgid "Clone the Repository"
+msgstr "リポジトリのクローン"
+
+#: ../../dev/setup.md:31
+msgid "Install Dependencies"
+msgstr "依存関係のインストール"
+
+#: ../../dev/setup.md:38
+msgid "Verify the Setup"
+msgstr "セットアップの確認"
+
+#~ msgid "Python パッケージ管理・仮想環境"
+#~ msgstr ""
+
+#~ msgid "uv が自動インストール"
+#~ msgstr ""
+
+#~ msgid "Pagefind 検索インデックス生成に使用"
+#~ msgstr ""
+
+#~ msgid "uv のインストール"
+#~ msgstr ""
+

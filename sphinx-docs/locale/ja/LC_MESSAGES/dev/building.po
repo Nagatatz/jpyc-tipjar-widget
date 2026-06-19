@@ -1,0 +1,108 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nagatatz
+# This file is distributed under the same license as the JPYC Tip Jar Widget
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: JPYC Tip Jar Widget \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-19 19:29+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../dev/building.md:1
+msgid "Building"
+msgstr "ビルド"
+
+#: ../../dev/building.md:3
+msgid ""
+"The widget is written in ReScript and compiled in-source to `.res.js` "
+"files that are published to npm."
+msgstr "ウィジェットは ReScript で書かれており、インソースコンパイルによって `.res.js` ファイルへコンパイルされ、npm に公開（publish）されます。"
+
+#: ../../dev/building.md:6
+msgid "Build Commands"
+msgstr "ビルドコマンド"
+
+#: ../../dev/building.md
+msgid "Command"
+msgstr "コマンド"
+
+#: ../../dev/building.md
+msgid "Description"
+msgstr "説明"
+
+#: ../../dev/building.md
+msgid "`pnpm build`"
+msgstr ""
+
+#: ../../dev/building.md
+msgid "Compile ReScript to `.res.js` (`rescript build`)."
+msgstr "ReScript を `.res.js` にコンパイルします（`rescript build`）。"
+
+#: ../../dev/building.md
+msgid "`pnpm clean`"
+msgstr ""
+
+#: ../../dev/building.md
+msgid "Remove generated build artifacts (`rescript clean`)."
+msgstr "生成されたビルド生成物を削除します（`rescript clean`）。"
+
+#: ../../dev/building.md
+msgid "`pnpm clean && pnpm build`"
+msgstr ""
+
+#: ../../dev/building.md
+msgid "Clean rebuild."
+msgstr "クリーンな再ビルド。"
+
+#: ../../dev/building.md:14
+msgid ""
+"The ReScript build doubles as the type check — there is no separate "
+"typecheck step."
+msgstr "ReScript のビルドは型チェックも兼ねており、別途の型チェックステップはありません。"
+
+#: ../../dev/building.md:16
+msgid "Output"
+msgstr "出力"
+
+#: ../../dev/building.md:18
+msgid ""
+"`.res.js` files are emitted next to their `.res` sources (in-source "
+"compilation). The npm package bundles the compiled `.res.js`, the "
+"`.res`/`.resi` sources, `README.md`, `README.ja.md`, and `LICENSE` (see "
+"the `files` field in `package.json`)."
+msgstr "`.res.js` ファイルは、対応する `.res` ソースの隣に出力されます（インソースコンパイル）。npm パッケージには、コンパイル済みの `.res.js`、`.res`/`.resi` ソース、`README.md`、`README.ja.md`、`LICENSE` が含まれます（`package.json` の `files` フィールドを参照）。"
+
+#: ../../dev/building.md:22
+msgid "Publishing"
+msgstr "公開"
+
+#: ../../dev/building.md:30
+msgid "CI Pipeline"
+msgstr "CI パイプライン"
+
+#: ../../dev/building.md:32
+msgid ""
+"GitHub Actions templates are provided under `.github/workflows/` (Claude "
+"code review, auto PR description, quality measurement, and the "
+"documentation site build). Activate them by removing the `.template` "
+"suffix and configuring the required secrets."
+msgstr "GitHub Actions のテンプレートは `.github/workflows/` 配下に用意されています（Claude によるコードレビュー、PR 説明の自動生成、品質測定、ドキュメントサイトのビルド）。`.template` サフィックスを削除し、必要なシークレットを設定することで有効化できます。"
+
+#~ msgid "<!-- e.g. `npm run build` -->"
+#~ msgstr ""
+
+#~ msgid "<!-- Build the project -->"
+#~ msgstr ""
+

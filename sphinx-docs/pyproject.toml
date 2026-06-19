@@ -1,0 +1,68 @@
+[project]
+name = "jpyc-tipjar-widget-docs"
+version = "0.1.0"
+description = "Sphinx documentation for jpyc-tipjar-widget"
+requires-python = ">=3.12"
+dependencies = [
+    "Sphinx>=9.1,<10.0",
+    "furo>=2025.12.19,<2027.0",
+    "myst-parser>=5.0,<6.0",
+    "sphinx-intl>=2.3.2,<3.0",
+    "sphinx-copybutton>=0.5.2,<1.0",
+    "sphinx-design>=0.7,<1.0",
+    "sphinxext-opengraph>=0.13,<1.0",
+    "sphinx-sitemap>=2.9,<3.0",
+    "sphinx-notfound-page>=1.1,<2.0",
+    "sphinx-tippy>=0.4.3,<1.0",
+    "sphinx-last-updated-by-git>=0.3.8,<1.0",
+    "sphinx-llms-txt>=0.7.1",
+    "sphinxcontrib-budoux>=0.1.6",
+    "atsphinx-htmx-boost>=0.3,<1.0",
+    "sphinxcontrib-mermaid>=2.0,<3.0",
+    "sphinx-togglebutton>=0.4.5,<1.0",
+    "sphinx-multiversion>=0.2.4,<1.0",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.15.12",
+    "mypy>=2.0",
+    "pytest>=9.0.3",
+    "pytest-cov>=7.1",
+    "sphinx-autobuild>=2025.8.25",
+    "sphinx-lint>=1.0.2",
+    "translate-toolkit>=3.19.8",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = []
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "UP", "B", "SIM"]
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"conf.py" = ["E402"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+docstring-code-format = true
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+exclude = ["conf\\.py"]
+
+[[tool.mypy.overrides]]
+module = ["sphinx.*", "pygments.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--tb=short"

@@ -1,0 +1,53 @@
+target: code-reviewer
+type: agent
+description: code-reviewer agent の auto-invoke / タスク完遂を評価する初期データセット
+cases:
+  - id: 1
+    prompt: "コミット前にこの変更をレビューして"
+    expected_invocation: code-reviewer
+    notes: 定型のコミット前レビュー要請、auto-invoke の典型例
+
+  - id: 2
+    prompt: "PR を作る前にコードを見てほしい"
+    expected_invocation: code-reviewer
+    notes: PR 作成前のレビュー、定型パターン
+
+  - id: 3
+    prompt: "セキュリティ脆弱性を確認して"
+    expected_invocation: security-reviewer
+    notes: code-reviewer ではなく security-reviewer に委譲されるべき (誤発火検出)
+
+  - id: 4
+    prompt: "ファイル一覧を見せて"
+    expected_invocation: none
+    notes: agent 委譲ではなく直接 ls すべき (誤発火検出)
+
+  - id: 5
+    prompt: "デッドコードがあるか調べて"
+    expected_invocation: code-reviewer
+    notes: code-reviewer の 8 観点に「デッドコード」が含まれる
+
+  - id: 6
+    prompt: "テストの抜けが無いかチェックして"
+    expected_invocation: code-reviewer
+    notes: テスト存在は code-reviewer の観点
+
+  - id: 7
+    prompt: "git log を表示して"
+    expected_invocation: none
+    notes: 単純な git 操作、agent 委譲不要
+
+  - id: 8
+    prompt: "コードスタイルが統一されているか見て"
+    expected_invocation: code-reviewer
+    notes: コードスタイルは code-reviewer の観点
+
+  - id: 9
+    prompt: "エッジケースのカバレッジが足りているかレビューして"
+    expected_invocation: code-reviewer
+    notes: エッジケース確認は code-reviewer の責務
+
+  - id: 10
+    prompt: "リファクタリング案を出して"
+    expected_invocation: none
+    notes: 改善提案は委譲よりメイン会話で扱うほうが自然 (グレーケース)

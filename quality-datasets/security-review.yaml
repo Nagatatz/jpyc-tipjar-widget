@@ -1,0 +1,56 @@
+target: security-review
+type: skill
+description: security-review skill の auto-invoke を評価するデータセット。セキュリティ観点の要求で発火し、汎用レビューや単純操作では発火しないことを確認する
+cases:
+  # ───── 発火すべきケース（true-positive 確認） ─────
+  - id: 1
+    prompt: "この認証フローにセキュリティ上の問題がないか見て"
+    expected_invocation: security-review
+    notes: 認証周りのセキュリティ検証は security-review の中核
+
+  - id: 2
+    prompt: "ユーザー入力を受け取るAPIの脆弱性をチェックして"
+    expected_invocation: security-review
+    notes: 入力バリデーション / インジェクションは OWASP 観点
+
+  - id: 3
+    prompt: "この変更をマージ前にセキュリティレビューして"
+    expected_invocation: security-review
+    notes: 定型のセキュリティレビュー要請
+
+  - id: 4
+    prompt: "機密情報がログに漏れていないか確認したい"
+    expected_invocation: security-review
+    notes: データ保護 / 機密漏洩は security-review の観点
+
+  - id: 5
+    prompt: "権限チェックが正しく効いているか監査して"
+    expected_invocation: security-review
+    notes: 認可（authorization）の検証
+
+  # ───── 発火すべきでないケース（false-positive 検出） ─────
+  - id: 6
+    prompt: "コミット前に全体のコード品質をレビューして"
+    expected_invocation: code-reviewer
+    notes: 汎用コード品質は code-reviewer、セキュリティ特化ではない
+
+  - id: 7
+    prompt: "ファイル一覧を見せて"
+    expected_invocation: none
+    notes: 単純な参照、レビュー不要
+
+  - id: 8
+    prompt: "テストの抜けがないかチェックして"
+    expected_invocation: code-reviewer
+    notes: テストカバレッジは code-reviewer の観点
+
+  - id: 9
+    prompt: "デッドコードを探して"
+    expected_invocation: code-reviewer
+    notes: デッドコード検出は code-reviewer、セキュリティではない
+
+  # ───── エッジケース ─────
+  - id: 10
+    prompt: "この暗号化処理の実装、これで大丈夫？"
+    expected_invocation: security-review
+    notes: 暗号の妥当性検証はセキュリティ観点。曖昧だが security-review が適切

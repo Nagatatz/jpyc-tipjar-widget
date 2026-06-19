@@ -1,0 +1,12 @@
+# Sphinx build output
+_build/
+_build_ja/
+
+# Python virtualenv (uv)
+.venv/
+__pycache__/
+*.pyc
+
+# Node / Pagefind
+node_modules/
+pagefind/

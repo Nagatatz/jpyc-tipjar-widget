@@ -1,0 +1,105 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nagatatz
+# This file is distributed under the same license as the JPYC Tip Jar Widget
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: JPYC Tip Jar Widget \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-19 19:29+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../user/quickstart.md:1
+msgid "Quick Start"
+msgstr "クイックスタート"
+
+#: ../../user/quickstart.md:3
+msgid "This guide walks you through embedding the tip jar after installation."
+msgstr "このガイドでは、インストール後に投げ銭ウィジェットを埋め込む手順を説明します。"
+
+#: ../../user/quickstart.md:5
+msgid "Prerequisites"
+msgstr "前提条件"
+
+#: ../../user/quickstart.md:7
+msgid "Completed [Installation](installation.md)"
+msgstr "[インストール](installation.md)が完了していること"
+
+#: ../../user/quickstart.md:8
+msgid ""
+"`NEXT_PUBLIC_TIPJAR_RECIPIENT_ADDRESS` set, or a recipient address ready "
+"to pass as a prop"
+msgstr "`NEXT_PUBLIC_TIPJAR_RECIPIENT_ADDRESS` が設定されているか、プロップとして渡す受取アドレスが用意されていること"
+
+#: ../../user/quickstart.md:10
+msgid "Embed the widget"
+msgstr "ウィジェットを埋め込む"
+
+#: ../../user/quickstart.md:12
+msgid "Import the default export and render it anywhere in a React tree:"
+msgstr "デフォルトエクスポートをインポートし、React ツリーの任意の場所でレンダリングします。"
+
+#: ../../user/quickstart.md:30
+msgid "Use from ReScript"
+msgstr "ReScript から使う"
+
+#: ../../user/quickstart.md:32
+msgid "In a ReScript project, declare one binding to the `default` export:"
+msgstr "ReScript プロジェクトでは、`default` エクスポートへのバインディングを 1 つ宣言します。"
+
+#: ../../user/quickstart.md:49
+msgid "How a tip flows"
+msgstr "投げ銭の流れ"
+
+#: ../../user/quickstart.md:51
+msgid "The visitor picks a preset amount or enters a custom one."
+msgstr "訪問者はプリセットの金額を選ぶか、任意の金額を入力します。"
+
+#: ../../user/quickstart.md:52
+msgid ""
+"With MetaMask installed, they connect and send JPYC on Polygon directly "
+"to the recipient."
+msgstr "MetaMask がインストールされていれば、ウォレットを接続し、Polygon 上で JPYC を受取先へ直接送金します。"
+
+#: ../../user/quickstart.md:53
+msgid ""
+"Without MetaMask, an EIP-681 QR code is shown; a mobile wallet scans it "
+"to send."
+msgstr "MetaMask がない場合は EIP-681 の QR コードが表示され、モバイルウォレットでスキャンして送金します。"
+
+#: ../../user/quickstart.md:55
+msgid "The server never custodies funds — every transfer is on-chain and direct."
+msgstr "サーバーは資金を一切預かりません（サーバーレス・資金を預からない）。すべての送金はオンチェーンかつ直接行われます。"
+
+#: ../../user/quickstart.md:57
+msgid "What's Next?"
+msgstr "次のステップ"
+
+#: ../../user/quickstart.md:59
+msgid "[Configuration](configuration.md) — Props and environment variables"
+msgstr "[設定](configuration.md) — プロップと環境変数"
+
+#: ../../user/quickstart.md:60
+msgid "[Changelog](changelog.md) — See what's new"
+msgstr "[変更履歴](changelog.md) — 新着情報を確認"
+
+#~ msgid "This guide walks you through your first experience after installation."
+#~ msgstr ""
+
+#~ msgid "Getting Started"
+#~ msgstr ""
+
+#~ msgid "[Configuration](configuration.md) — Customize settings"
+#~ msgstr ""
+

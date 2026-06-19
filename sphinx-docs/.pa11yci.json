@@ -1,0 +1,24 @@
+{
+  "defaults": {
+    "standard": "WCAG2AA",
+    "timeout": 30000,
+    "wait": 500,
+    "chromeLaunchConfig": {
+      "args": ["--no-sandbox", "--disable-dev-shm-usage"]
+    },
+    "ignore": [
+      "color-contrast",
+      "region"
+    ]
+  },
+  "urls": [
+    "http://127.0.0.1:8765/en/",
+    "http://127.0.0.1:8765/en/user/quickstart.html",
+    "http://127.0.0.1:8765/en/user/installation.html",
+    "http://127.0.0.1:8765/en/user/configuration.html",
+    "http://127.0.0.1:8765/en/dev/setup.html",
+    "http://127.0.0.1:8765/en/dev/contributing.html",
+    "http://127.0.0.1:8765/ja/",
+    "http://127.0.0.1:8765/ja/user/quickstart.html"
+  ]
+}

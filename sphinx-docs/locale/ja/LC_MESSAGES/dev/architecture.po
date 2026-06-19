@@ -1,0 +1,195 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nagatatz
+# This file is distributed under the same license as the JPYC Tip Jar Widget
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: JPYC Tip Jar Widget \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-19 19:29+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../dev/architecture.md:1
+msgid "Architecture"
+msgstr "アーキテクチャ"
+
+#: ../../dev/architecture.md:3
+msgid "Overview"
+msgstr "概要"
+
+#: ../../dev/architecture.md:5
+msgid ""
+"The widget is a self-contained React component compiled from ReScript. It"
+" performs a **server-less, on-chain direct transfer**: the visitor sends "
+"JPYC on Polygon straight to the recipient's wallet, and no backend ever "
+"custodies funds. When MetaMask is unavailable, it degrades to an EIP-681 "
+"QR code that mobile wallets can scan."
+msgstr "このウィジェットは ReScript からコンパイルされた自己完結型の React コンポーネントです。**サーバーレスのオンチェーン直接送金**を行います。訪問者は Polygon 上の JPYC を受取アドレスのウォレットへ直接送金し、バックエンドが資金を預かることは一切ありません。MetaMask が利用できない場合は、モバイルウォレットがスキャンできる EIP-681 QR コードへとグレースフルにフォールバックします。"
+
+#: ../../dev/architecture.md:10
+msgid "Key Components"
+msgstr "主要コンポーネント"
+
+#: ../../dev/architecture.md:12
+msgid "The source is organized into layers under `src/`:"
+msgstr "ソースは `src/` 配下のレイヤーに整理されています:"
+
+#: ../../dev/architecture.md
+msgid "Layer"
+msgstr "レイヤー"
+
+#: ../../dev/architecture.md
+msgid "Responsibility"
+msgstr "責務"
+
+#: ../../dev/architecture.md
+msgid "`Entry.res`"
+msgstr ""
+
+#: ../../dev/architecture.md
+msgid "Public entry point — the `default` export and the `~variant` prop."
+msgstr "公開エントリーポイント — `default` エクスポートと `~variant` プロップ。"
+
+#: ../../dev/architecture.md
+msgid "`Theme.res`"
+msgstr ""
+
+#: ../../dev/architecture.md
+msgid "Styles aggregated per variant (`rich` / `simple`)."
+msgstr "バリアント（`rich` / `simple`）ごとに集約されたスタイル。"
+
+#: ../../dev/architecture.md
+msgid "`bindings/`"
+msgstr ""
+
+#: ../../dev/architecture.md
+msgid ""
+"Minimal bindings to external libraries: `Viem`, `BrowserEthereum`, "
+"`QRCode`, `Clipboard`."
+msgstr "外部ライブラリへの最小限のバインディング: `Viem`、`BrowserEthereum`、`QRCode`、`Clipboard`。"
+
+#: ../../dev/architecture.md
+msgid "`domain/`"
+msgstr ""
+
+#: ../../dev/architecture.md
+msgid ""
+"Pure values and logic: `Chain`, `Jpyc`, `TipAmount`, `PaymentUri`. No "
+"side effects."
+msgstr "純粋な値とロジック: `Chain`、`Jpyc`、`TipAmount`、`PaymentUri`。副作用はありません。"
+
+#: ../../dev/architecture.md
+msgid "`effects/`"
+msgstr ""
+
+#: ../../dev/architecture.md
+msgid ""
+"Side effects: the `WalletProvider` abstraction and its `MetaMaskProvider`"
+" implementation."
+msgstr "副作用: `WalletProvider` 抽象とその `MetaMaskProvider` 実装。"
+
+#: ../../dev/architecture.md
+msgid "`components/`"
+msgstr ""
+
+#: ../../dev/architecture.md
+msgid "UI: `TipJar`, `AmountSelector`, `ConnectButton`, `TxStatus`, `QrFallback`."
+msgstr "UI: `TipJar`、`AmountSelector`、`ConnectButton`、`TxStatus`、`QrFallback`。"
+
+#: ../../dev/architecture.md:23
+msgid "Design Principles"
+msgstr "設計原則"
+
+#: ../../dev/architecture.md:25
+msgid ""
+"**Server-less / non-custodial** — every transfer is on-chain and direct; "
+"the recipient is any wallet address."
+msgstr "**サーバーレス / 資金を預からない（non-custodial）** — すべての送金はオンチェーンで直接行われ、受取先は任意のウォレットアドレスです。"
+
+#: ../../dev/architecture.md:27
+msgid ""
+"**Layered purity** — `domain/` holds pure logic, `effects/` isolates side"
+" effects, and `bindings/` keeps external-library surface area minimal."
+msgstr "**層ごとの純粋性** — `domain/` は純粋なロジックを保持し、`effects/` は副作用を分離し、`bindings/` は外部ライブラリとの接触面を最小限に保ちます。"
+
+#: ../../dev/architecture.md:29
+msgid ""
+"**Graceful fallback** — without MetaMask, the widget still works via an "
+"EIP-681 QR code, so mobile-wallet users are never blocked."
+msgstr "**グレースフルフォールバック** — MetaMask がなくても、ウィジェットは EIP-681 QR コードを介して動作するため、モバイルウォレットのユーザーが行き詰まることはありません。"
+
+#: ../../dev/architecture.md:32
+msgid "Transfer flow"
+msgstr "送金フロー"
+
+#: ../../dev/architecture.md:45
+msgid "QR fallback specification"
+msgstr "QR フォールバック仕様"
+
+#: ../../dev/architecture.md:47
+msgid "Scheme: [EIP-681](https://eips.ethereum.org/EIPS/eip-681)"
+msgstr "スキーム: [EIP-681](https://eips.ethereum.org/EIPS/eip-681)"
+
+#: ../../dev/architecture.md:48
+msgid ""
+"Format: `ethereum:<JPYC>@137/transfer?address=<recipient>&uint256"
+"=<amount-wei>`"
+msgstr "フォーマット: `ethereum:<JPYC>@137/transfer?address=<recipient>&uint256=<amount-wei>`"
+
+#: ../../dev/architecture.md:49
+msgid ""
+"Amount handling: a preset or custom amount includes the `uint256` query; "
+"when no amount is entered the query is omitted and the wallet prompts for"
+" it."
+msgstr "金額の扱い: プリセットまたはカスタム金額が指定されている場合は `uint256` クエリが含まれます。金額が入力されていない場合はクエリが省略され、ウォレット側で入力が求められます。"
+
+#: ../../dev/architecture.md:51
+msgid "Rendering: `QRCodeSVG` from `qrcode.react` (pure SVG, SSR-safe)."
+msgstr "レンダリング: `qrcode.react` の `QRCodeSVG`（純粋な SVG、SSR セーフ）。"
+
+#~ msgid "**Principle 1** — Description"
+#~ msgstr ""
+
+#~ msgid "**Principle 2** — Description"
+#~ msgstr ""
+
+#~ msgid "Diagram Examples"
+#~ msgstr ""
+
+#~ msgid "Mermaid Diagrams"
+#~ msgstr ""
+
+#~ msgid "Use the `{mermaid}` directive to embed diagrams directly in Markdown:"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Supported diagram types: flowchart, sequence,"
+#~ " class, state, ER, Gantt, pie, and"
+#~ " more. See [Mermaid "
+#~ "documentation](https://mermaid.js.org/) for syntax "
+#~ "reference."
+#~ msgstr ""
+
+#~ msgid "Collapsible Sections"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Use `{toggle}` to create collapsible "
+#~ "content (e.g., for detailed explanations "
+#~ "or optional content):"
+#~ msgstr ""
+
+#~ msgid "To show the section expanded by default, add the `:show:` option:"
+#~ msgstr ""
+

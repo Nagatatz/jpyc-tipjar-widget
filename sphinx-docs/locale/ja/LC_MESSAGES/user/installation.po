@@ -1,0 +1,137 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Nagatatz
+# This file is distributed under the same license as the JPYC Tip Jar Widget
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: JPYC Tip Jar Widget \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-19 19:29+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../user/installation.md:1
+msgid "Installation"
+msgstr "インストール"
+
+#: ../../user/installation.md:3
+msgid "Requirements"
+msgstr "要件"
+
+#: ../../user/installation.md:5
+msgid ""
+"**React 19+** — the host application provides `react` and `react-dom` "
+"(they are `peerDependencies`)."
+msgstr "**React 19+** — ホストアプリが `react` と `react-dom` を提供します（これらは `peerDependencies` です）。"
+
+#: ../../user/installation.md:6
+msgid ""
+"**A wallet** — the MetaMask browser extension, or any EIP-681-capable "
+"mobile wallet (MetaMask Mobile, Rainbow, etc.) for the QR fallback."
+msgstr "**ウォレット** — MetaMask ブラウザ拡張機能、または QR フォールバック用の EIP-681 対応モバイルウォレット（MetaMask Mobile、Rainbow など）。"
+
+#: ../../user/installation.md:7
+msgid "**Polygon mainnet** — transfers settle on Polygon (chainId 137)."
+msgstr "**Polygon メインネット** — 送金は Polygon（chainId 137）上で決済（送金が確定する）されます。"
+
+#: ../../user/installation.md:8
+msgid ""
+"**An Alchemy API key** — a Polygon mainnet API key, set as an environment"
+" variable in the host app."
+msgstr "**Alchemy API キー** — Polygon メインネット用の API キーで、ホストアプリの環境変数として設定します。"
+
+#: ../../user/installation.md:10
+msgid "Install"
+msgstr "インストール"
+
+#: ../../user/installation.md:12
+msgid "Add the package with your package manager:"
+msgstr "お使いのパッケージマネージャーでパッケージを追加します。"
+
+#: ../../user/installation.md:19
+msgid "`viem` and `qrcode.react` are installed automatically as dependencies."
+msgstr "`viem` と `qrcode.react` は依存関係として自動的にインストールされます。"
+
+#: ../../user/installation.md:21
+msgid "Configure environment variables"
+msgstr "環境変数を設定する"
+
+#: ../../user/installation.md:23
+msgid ""
+"`process.env.NEXT_PUBLIC_*` values are inlined at the host app's build "
+"time. Set the following in the host's `.env.local`:"
+msgstr "`process.env.NEXT_PUBLIC_*` の値はホストアプリのビルド時にインライン展開されます。ホストの `.env.local` に以下を設定してください。"
+
+#: ../../user/installation.md:31
+msgid "`NEXT_PUBLIC_ALCHEMY_API_KEY` — an Alchemy API key for Polygon mainnet."
+msgstr "`NEXT_PUBLIC_ALCHEMY_API_KEY` — Polygon メインネット用の Alchemy API キー。"
+
+#: ../../user/installation.md:32
+msgid ""
+"`NEXT_PUBLIC_TIPJAR_RECIPIENT_ADDRESS` — the wallet address that receives"
+" tips."
+msgstr "`NEXT_PUBLIC_TIPJAR_RECIPIENT_ADDRESS` — 投げ銭を受け取るウォレットアドレス。"
+
+#: ../../user/installation.md:34
+msgid "Tailwind CSS"
+msgstr "Tailwind CSS"
+
+#: ../../user/installation.md:36
+msgid ""
+"The widget is styled with Tailwind utility classes. If the host app uses "
+"Tailwind, include the widget's classes in the scan targets:"
+msgstr "このウィジェットは Tailwind のユーティリティクラスでスタイリングされています。ホストアプリが Tailwind を使用している場合は、ウィジェットのクラスをスキャン対象に含めてください。"
+
+#: ../../user/installation.md:49
+msgid "Verify"
+msgstr "動作確認"
+
+#: ../../user/installation.md:51
+msgid "Render the widget in a page and confirm it mounts:"
+msgstr "ページにウィジェットをレンダリングし、マウントされることを確認します。"
+
+#: ../../user/installation.md:61
+msgid ""
+"If MetaMask is installed you should see the connect button; otherwise the"
+" EIP-681 QR fallback is shown."
+msgstr "MetaMask がインストールされていれば接続ボタンが表示され、そうでなければ EIP-681 の QR フォールバックが表示されます。"
+
+#: ../../user/installation.md:64
+msgid "Troubleshooting"
+msgstr "トラブルシューティング"
+
+#: ../../user/installation.md:66
+msgid ""
+"**The widget is unstyled** — confirm the Tailwind `content` globs include"
+" `node_modules/jpyc-tipjar-widget/**/*.js`."
+msgstr "**ウィジェットにスタイルが適用されない** — Tailwind の `content` glob に `node_modules/jpyc-tipjar-widget/**/*.js` が含まれていることを確認してください。"
+
+#: ../../user/installation.md:68
+msgid ""
+"**The recipient address is missing** — pass `recipientAddress` as a prop "
+"or set `NEXT_PUBLIC_TIPJAR_RECIPIENT_ADDRESS`."
+msgstr "**受取アドレスが指定されていない** — `recipientAddress` をプロップとして渡すか、`NEXT_PUBLIC_TIPJAR_RECIPIENT_ADDRESS` を設定してください。"
+
+#: ../../user/installation.md:70
+msgid ""
+"**No QR code appears and MetaMask is absent** — verify the recipient "
+"address is a valid Polygon address; the QR encodes an EIP-681 URI for "
+"that address."
+msgstr "**QR コードが表示されず MetaMask もない** — 受取アドレスが有効な Polygon アドレスであることを確認してください。QR はそのアドレス向けの EIP-681 URI をエンコードしています。"
+
+#~ msgid "**Requirement 1** — Description"
+#~ msgstr ""
+
+#~ msgid "**Requirement 2** — Description"
+#~ msgstr ""
+

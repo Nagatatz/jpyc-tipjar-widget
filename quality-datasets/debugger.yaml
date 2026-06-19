@@ -1,0 +1,56 @@
+target: debugger
+type: agent
+description: debugger agent の auto-invoke を評価するデータセット。バグ・テスト失敗・例外の根本原因分析で発火し、機能追加やビルドエラー・汎用レビューでは発火しないことを確認する
+cases:
+  # ───── 発火すべきケース（true-positive 確認） ─────
+  - id: 1
+    prompt: "このスタックトレースの原因を調べて直して"
+    expected_invocation: debugger
+    notes: 例外・スタックトレースの根本原因分析は debugger の中核
+
+  - id: 2
+    prompt: "テストが1件落ちるんだけど原因がわからない"
+    expected_invocation: debugger
+    notes: テスト失敗の根本原因分析
+
+  - id: 3
+    prompt: "本番だけ NullPointerException が出る、なぜ？"
+    expected_invocation: debugger
+    notes: 環境依存の不具合の根本原因調査
+
+  - id: 4
+    prompt: "ボタンを押すと稀にフリーズする不具合を調査して"
+    expected_invocation: debugger
+    notes: 予期しない挙動の原因究明
+
+  - id: 5
+    prompt: "この関数が想定外の値を返す理由を突き止めて"
+    expected_invocation: debugger
+    notes: ロジック不具合の根本原因分析
+
+  # ───── 発火すべきでないケース（false-positive 検出） ─────
+  - id: 6
+    prompt: "新しいダッシュボード画面を追加したい"
+    expected_invocation: steering
+    notes: 機能追加はバグ調査ではなく steering ワークフロー
+
+  - id: 7
+    prompt: "pnpm build が型エラーで失敗する、直して"
+    expected_invocation: build-resolver
+    notes: ビルド・型・コンパイル失敗は build-resolver の責務
+
+  - id: 8
+    prompt: "ファイル一覧を見せて"
+    expected_invocation: none
+    notes: 単純な参照、調査不要
+
+  - id: 9
+    prompt: "コミット前にコード品質をレビューして"
+    expected_invocation: code-reviewer
+    notes: 品質レビューは code-reviewer、バグ調査ではない
+
+  # ───── エッジケース ─────
+  - id: 10
+    prompt: "なんか動きがおかしいんだけど見てくれる？"
+    expected_invocation: debugger
+    notes: 曖昧だが「予期しない挙動」を示唆、debugger が最有力

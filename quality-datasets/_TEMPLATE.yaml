@@ -1,0 +1,40 @@
+target: <skill-or-agent-name>           # 評価対象の skill / agent 名（ディレクトリ名 / ファイル名と一致）
+type: skill                              # skill | agent
+description: <skill / agent の auto-invoke と完遂率を評価するデータセット>
+
+# 評価原則:
+# - 10〜20 ケースを目安に、半数を「発火すべき」、半数を「発火すべきでない」で構成する
+# - 「発火すべきでない」ケースは、対象 skill / agent と似た語彙を含むが目的が異なるものを意図的に選ぶ（false-positive 検出）
+# - prompt はユーザーが自然に発話するフレーズで書く（formal な記述は避ける）
+
+cases:
+  # ───── 発火すべきケース（true-positive 確認） ─────
+
+  - id: 1
+    prompt: "<想定発火フレーズ 1>"
+    expected_invocation: <skill-or-agent-name>
+    notes: <なぜこのフレーズが auto-invoke されるべきか>
+
+  - id: 2
+    prompt: "<想定発火フレーズ 2>"
+    expected_invocation: <skill-or-agent-name>
+    notes: <典型シナリオの記述>
+
+  # ───── 発火すべきでないケース（false-positive 検出） ─────
+
+  - id: 3
+    prompt: "<似た語彙だが別目的のフレーズ>"
+    expected_invocation: <different-skill-name>     # 別 skill が起動すべき
+    notes: <なぜ対象 skill ではなく別 skill が選ばれるべきか>
+
+  - id: 4
+    prompt: "<直接実行で十分なフレーズ>"
+    expected_invocation: none                        # どの skill / agent も起動すべきでない
+    notes: <なぜ skill 委譲が不要か（例: 単純な Read / ls）>
+
+  # ───── エッジケース ─────
+
+  - id: 5
+    prompt: "<曖昧 / 多義的なフレーズ>"
+    expected_invocation: <best-fit-skill>
+    notes: <複数候補がある中でなぜこれを選ぶか>
