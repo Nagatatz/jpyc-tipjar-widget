@@ -16,6 +16,12 @@
 
 -
 
+## 0.1.1 (2026-06-19)
+
+### Changed
+
+- Documentation only: add CI (Docs/Release) and GitHub Sponsors badges to the README. No code changes; the published widget is identical to 0.1.0.
+
 ## 0.1.0
 
 ### Added

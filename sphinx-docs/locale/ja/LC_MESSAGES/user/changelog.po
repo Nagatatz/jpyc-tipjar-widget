@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JPYC Tip Jar Widget \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-19 19:29+0900\n"
+"POT-Creation-Date: 2026-06-19 22:00+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -28,11 +28,11 @@ msgstr "変更履歴"
 msgid "Unreleased"
 msgstr "未リリース"
 
-#: ../../user/changelog.md:7 ../../user/changelog.md:21
+#: ../../user/changelog.md:7 ../../user/changelog.md:27
 msgid "Added"
 msgstr "追加"
 
-#: ../../user/changelog.md:11
+#: ../../user/changelog.md:11 ../../user/changelog.md:21
 msgid "Changed"
 msgstr "変更"
 
@@ -41,22 +41,32 @@ msgid "Fixed"
 msgstr "修正"
 
 #: ../../user/changelog.md:19
-msgid "0.1.0"
+msgid "0.1.1 (2026-06-19)"
 msgstr ""
 
 #: ../../user/changelog.md:23
+msgid ""
+"Documentation only: add CI (Docs/Release) and GitHub Sponsors badges to "
+"the README. No code changes; the published widget is identical to 0.1.0."
+msgstr "ドキュメントのみ: README に CI（Docs/Release）と GitHub Sponsors のバッジを追加。コード変更はなく、公開されるウィジェットは 0.1.0 と同一です。"
+
+#: ../../user/changelog.md:25
+msgid "0.1.0"
+msgstr ""
+
+#: ../../user/changelog.md:29
 msgid "Initial release of the JPYC tip jar widget."
 msgstr "JPYC 投げ銭ウィジェットの初回リリース。"
 
-#: ../../user/changelog.md:24
+#: ../../user/changelog.md:30
 msgid "`rich` and `simple` layout variants."
 msgstr "`rich` と `simple` のレイアウト variant（バリアント）。"
 
-#: ../../user/changelog.md:25
+#: ../../user/changelog.md:31
 msgid "Server-less on-chain JPYC transfer on Polygon via MetaMask."
 msgstr "MetaMask を介した Polygon 上でのサーバーレス（資金を預からない）なオンチェーン JPYC 送金。"
 
-#: ../../user/changelog.md:26
+#: ../../user/changelog.md:32
 msgid "EIP-681 QR code fallback for mobile wallets when MetaMask is absent."
 msgstr "MetaMask がない場合の、モバイルウォレット向け EIP-681 QR コードフォールバック。"
 
