@@ -16,6 +16,12 @@
 
 -
 
+## 0.1.3 (2026-06-19)
+
+### Changed
+
+- Add an npm version badge to the README. Documentation only; the published widget is identical to 0.1.2 (this release exists so the badge appears on the npm package page).
+
 ## 0.1.2 (2026-06-19)
 
 ### Changed
