@@ -44,7 +44,7 @@ jobs:
         run: uv run ruff format --check .
 
       - name: Sphinx lint
-        run: uv run sphinx-lint .
+        run: uv run sphinx-lint . -i .venv -i _build -i _build_ja -i node_modules -i locale
 
       - name: Pytest
         run: uv run pytest

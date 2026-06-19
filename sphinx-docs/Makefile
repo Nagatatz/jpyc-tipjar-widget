@@ -75,7 +75,7 @@ lint:
 	uv run ruff format --check .
 
 sphinx-lint:
-	uv run sphinx-lint .
+	uv run sphinx-lint . -i .venv -i _build -i _build_ja -i node_modules -i locale
 
 typecheck:
 	uv run mypy .
