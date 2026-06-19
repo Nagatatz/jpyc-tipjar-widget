@@ -2,6 +2,10 @@
 
 **言語: [English](./README.md) | 日本語（このファイル）**
 
+[![Docs](https://github.com/Nagatatz/jpyc-tipjar-widget/actions/workflows/docs.yml/badge.svg)](https://github.com/Nagatatz/jpyc-tipjar-widget/actions/workflows/docs.yml)
+[![Release](https://github.com/Nagatatz/jpyc-tipjar-widget/actions/workflows/release.yml/badge.svg)](https://github.com/Nagatatz/jpyc-tipjar-widget/actions/workflows/release.yml)
+[![GitHub Sponsors](https://img.shields.io/github/sponsors/Nagatatz?logo=githubsponsors&logoColor=white&label=Sponsor&color=db61a2)](https://github.com/sponsors/Nagatatz)
+
 > このファイルは英語版 [`README.md`](./README.md) の翻訳です。`README.md` が正（canonical）であり、英語版を更新した際は本ファイルも同じ変更内で更新します。
 
 ブログ記事や任意の React ページに組み込める、**JPYC（日本円ステーブルコイン）投げ銭ウィジェット**です。
