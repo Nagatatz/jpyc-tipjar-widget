@@ -1,17 +1,16 @@
 ---
 name: prd-writing
-description: プロダクト要求定義書(PRD)を作成するための詳細ガイドとテンプレート。`/prd-writing` で起動。「PRD を書いて」「プロダクト要求定義書を作成して」「要件定義を起こして」リクエスト時、または新規プロジェクト / 新機能の企画フェーズで本スキルを案内する。
+description: テンプレートからプロダクト要求定義書（PRD）を作成する（`/prd-writing`）。
 allowed-tools: Read, Write
 disable-model-invocation: true
 ---
 
-## 既存 PRD 一覧（自動取得）
+## 既存 PRD
 
 !`ls -1 docs/product-requirements*.md 2>/dev/null || echo "(no existing PRDs)"`
 
-## 作成手順
+## 手順
 
-1. `docs/ideas/initial-requirements.md`を読み込む
-2. `./template.md`を読み込む
-3. テンプレートのプレースホルダー([○○]の部分)を、アイデアメモの内容に基づいて具体化する
-4. `docs/product-requirements.md`として保存する
+1. アイデアメモ `docs/ideas/initial-requirements.md` を読む。無ければ、目的・対象ユーザー・主要機能・制約をユーザーに聞く。
+2. [template.md](template.md) を読み、`[○○]` のプレースホルダーをメモの内容で具体化する。
+3. `docs/product-requirements.md` に保存する（既にあれば上書き前に確認する）。
