@@ -66,7 +66,7 @@ make update-po                  # 英語ソース変更後に日本語 .po を�
 
 ## 入口ファイル
 
-規約の本文は本ファイルに置く。repo 直下の `CLAUDE.md` は `@AGENTS.md` の 1 行だけにしている。この repo は hobby workspace の下にあり、上位の `hobby/CLAUDE.md` があると Claude Code は本ファイルを読まないため（2026-10-28 に Claude Code 2.1.312 で確認）。`CLAUDE.md` に本文を足さない。
+規約の本文は本ファイルに置く。repo 直下の `CLAUDE.md` は `@AGENTS.md` の 1 行だけにしている。repo 直下に `CLAUDE.md` が無いと、Claude Code は本ファイルを読まなかった。`@AGENTS.md` の 1 行の `CLAUDE.md` を置くと読まれた（2026-10-28 に Claude Code 2.1.312 で確認。上位に `hobby/CLAUDE.md` があることが原因かは確かめていない）。`CLAUDE.md` に本文を足さない。
 
 ## 個人メモ
 

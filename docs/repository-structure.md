@@ -27,7 +27,7 @@ jpyc-tipjar-widget/
 | ファイル | 役割 |
 |---|---|
 | `AGENTS.md` | エージェント共通の入口。概要・コマンド・`.claude/rules/` の索引だけを置く |
-| `CLAUDE.md` | `@AGENTS.md` の 1 行だけ（上位に `hobby/CLAUDE.md` があると Claude Code が `AGENTS.md` を読まないため） |
+| `CLAUDE.md` | `@AGENTS.md` の 1 行だけ（repo 直下に `CLAUDE.md` が無いと Claude Code が `AGENTS.md` を読まなかったため。理由は `AGENTS.md` の「入口ファイル」） |
 | `.claude/rules/*.md` | 規約の本文。`paths:` の無いものは常時、あるものは一致するファイルを扱うときにロードされる |
 | `.claude/settings.json` | hooks 登録・権限・statusLine |
 | `.github/workflows/release.yml` | `v*` tag の push で npm に publish する（OIDC trusted publishing） |
