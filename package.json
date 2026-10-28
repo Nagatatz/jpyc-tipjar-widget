@@ -44,11 +44,11 @@
   },
   "dependencies": {
     "@rescript/react": "^0.15.0",
-    "@rescript/runtime": "^12.3.0",
+    "@rescript/runtime": "^12.3.1",
     "qrcode.react": "^4.2.0",
-    "viem": "^2.52.2"
+    "viem": "^2.57.12"
   },
   "devDependencies": {
-    "rescript": "^12.3.0"
+    "rescript": "^12.3.1"
   }
 }
