@@ -118,5 +118,5 @@ echo $?   # 0 (続行) or 非 0 (block) を確認
 ## 関連
 
 - `.claude/settings.json` — 実際の発火点登録
-- `.claude/rules/bash-safety.md` (skill) — validate-bash.sh と連動
+- `.claude/skills/bash-safety/SKILL.md` — validate-bash.sh と連動
 - 公式: [Hooks ガイド](https://code.claude.com/docs/en/hooks-guide)

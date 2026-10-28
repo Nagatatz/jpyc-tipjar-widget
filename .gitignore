@@ -3,7 +3,7 @@ node_modules/
 
 # ReScript build artifacts (compiled in-source)
 *.res.js
-lib/
+/lib/
 .bsb.lock
 
 # Env

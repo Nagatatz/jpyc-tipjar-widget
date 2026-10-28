@@ -14,8 +14,14 @@
 # Read stdin
 INPUT=$(cat)
 
-# Extract file_path field (fail-open if jq is unavailable or parse fails)
-FILE_PATH=$(echo "$INPUT" | jq -r '.tool_input.file_path // ""' 2>/dev/null) || exit 0
+# Shared JSON reader (jq -> python3 -> plutil). A guard that cannot read its input blocks (exit 2).
+HOOK_JSON_LIB="$(dirname "$0")/lib/json.sh"
+[ -r "$HOOK_JSON_LIB" ] || { echo "BLOCKED by validate-file-edit: $HOOK_JSON_LIB is missing; re-run install.sh" >&2; exit 2; }
+# shellcheck source=lib/json.sh
+. "$HOOK_JSON_LIB"
+hook_json_require validate-file-edit
+
+FILE_PATH=$(hook_json_get "$INPUT" tool_input.file_path)
 
 if [ -z "$FILE_PATH" ]; then
   exit 0

@@ -1,6 +1,6 @@
 ---
 name: empirical-prompt-tuning
-description: skill / agent の description / system prompt が意図通りの auto-invoke / 完遂率を達成しているか実測ベースで評価する。「skill の品質を測りたい」「agent をチューニングしたい」「auto-invoke が効いているか確認したい」「description リライトの効果を検証したい」リクエストに proactively 使用。テストデータセット (quality-datasets/<対象>.yaml) を入力に取り、評価フローを案内する。
+description: skill / agent の description が意図通り auto-invoke・完遂するかを quality-datasets で実測評価する。「skill の品質を測りたい」「description の効果を検証したい」リクエスト時に使用。
 allowed-tools: Read, Bash, Glob, Grep
 ---
 
@@ -64,9 +64,9 @@ bash scripts/evaluate-skills.sh quality-datasets/code-reviewer.yaml
 
 | 症状 | 改善仮説 |
 |---|---|
-| auto-invoke が発火しない | description の冒頭にユーザー発話の典型例を追加 |
+| auto-invoke が発火しない | description に、使う場面を意図の種類として書き足す（発話の例は 1〜2 個で足りる。外れた発話を 1 つずつ足していかない） |
 | 関係ない場面で発火する | description に「使うべきでない場面」を明記 |
-| 発火後に脱線する | system prompt の手順を箇条書きに分解 |
+| 発火後に脱線する | 本文に、目指す結果・守る制約・確かめ方を書き足す（番号付きの手順にするのは順序が本当に大事な所だけ） |
 | ツール呼び出しが過剰 | `allowed-tools` を絞る |
 
 ## CI 化
