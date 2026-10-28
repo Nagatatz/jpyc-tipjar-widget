@@ -16,6 +16,10 @@
 
 -
 
+### Internal
+
+- Pin the Docs and Release workflows to Node.js `^24.22.1`, which fixes the bundled Brotli decompression vulnerability (CVE-2026-111497, "Node2Shell" / "HTTP2Shell"). The published widget is unaffected: it runs in the browser and has no Brotli-decoding dependencies.
+
 ## 0.1.3 (2026-06-19)
 
 ### Changed
