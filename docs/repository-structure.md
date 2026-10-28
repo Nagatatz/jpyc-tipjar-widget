@@ -1,47 +1,36 @@
-# リポジトリ構造定義書
+# リポジトリ構造
 
-> **配布先プロジェクトでの編集を前提とした雛形です。** 自プロジェクトの実構成に合わせて全面的に書き換えてください。CLAUDE.md.template の `@docs/repository-structure.md` から参照されるため、削除は非推奨です。
-
-## プロジェクト構成（テンプレート例）
+利用者・コントリビューター向けの説明は `sphinx-docs/dev/project-structure.md`（英語、日本語は `.po`）と `sphinx-docs/dev/architecture.md` にある。本ファイルはエージェントが作業で使う置き場所の早見表。
 
 ```
-<project-root>/
-├── AGENTS.md                   # エージェント共通の入口（概要・コマンド・ルール索引）
-├── .claude/
-│   ├── agents/                 # サブエージェント定義
-│   ├── commands/               # スラッシュコマンド
-│   ├── examples/               # ゴールドスタンダード参考集
-│   ├── hooks/                  # ライフサイクル hook スクリプト
-│   ├── output-styles/          # 出力スタイル
-│   ├── rules/                  # 常時 @import されるルール
-│   ├── settings.json           # 権限・hook 登録・statusLine 設定
-│   ├── skills/                 # 状況発火型スキル
-│   └── statusline.sh           # statusLine コマンド
-├── docs/                       # 永続的設計ドキュメント
-├── sphinx-docs/                # 外部公開ユーザードキュメント (任意)
-├── src/                        # ソースコード（言語に応じて配置）
-└── tests/                      # ユニット・統合テスト
+jpyc-tipjar-widget/
+├── AGENTS.md          # エージェント共通の入口（概要・コマンド・ルール索引）
+├── CLAUDE.md          # `@AGENTS.md` の 1 行だけ
+├── src/               # ReScript ソース（in-source でコンパイルし、隣に .res.js ができる）
+│   ├── Entry.res      # 公開口（default export、~variant prop）
+│   ├── Theme.res      # variant ごとのスタイル
+│   ├── bindings/      # 外部ライブラリへの最小限の binding（Viem / BrowserEthereum / QRCode / Clipboard）
+│   ├── domain/        # 純粋な値とロジック（Chain / Jpyc / TipAmount / PaymentUri）
+│   ├── effects/       # 副作用（WalletProvider の抽象と MetaMaskProvider）
+│   └── components/    # UI（TipJar / AmountSelector / ConnectButton / TxStatus / QrFallback）
+├── sphinx-docs/       # 公開ドキュメント（英語ソース + locale/ja/）
+├── docs/              # 開発者向けの設計メモ
+├── scripts/           # 規約ファイルの点検（check-references.sh / measure-context-cost.sh ほか）
+├── quality-datasets/  # skill / agent の発火を測るデータセット
+├── .claude/           # rules・skills・agents・commands・hooks・settings
+├── .agents/skills     # `.claude/skills` への symlink（Codex など `.agents/skills` を読むエージェント向け）
+└── .github/workflows/ # docs.yml（Pages）・release.yml（npm publish）
 ```
-
-## レイヤー責務
-
-配布先プロジェクトでは、上記テンプレート例を参考に、実際のディレクトリ構成・レイヤー責務・依存方向の説明を追記してください。例:
-
-- **`src/domain/`** — ドメインモデル。外部 I/O から独立
-- **`src/application/`** — ユースケース層。`domain/` のみに依存
-- **`src/infrastructure/`** — 外部 I/O 実装（DB / API / FS）
 
 ## 主要ファイルの役割
 
 | ファイル | 役割 |
-|---------|------|
+|---|---|
 | `AGENTS.md` | エージェント共通の入口。概要・コマンド・`.claude/rules/` の索引だけを置く |
 | `CLAUDE.md` | `@AGENTS.md` の 1 行だけ（上位に `hobby/CLAUDE.md` があると Claude Code が `AGENTS.md` を読まないため） |
-| `.claude/settings.json` | hooks 登録 / 権限 / statusLine 設定 |
-| `docs/product-requirements.md` | プロダクト要求定義書（任意） |
-| `docs/architecture.md` | 技術仕様書（任意） |
+| `.claude/rules/*.md` | 規約の本文。`paths:` の無いものは常時、あるものは一致するファイルを扱うときにロードされる |
+| `.claude/settings.json` | hooks 登録・権限・statusLine |
+| `.github/workflows/release.yml` | `v*` tag の push で npm に publish する（OIDC trusted publishing） |
+| `sphinx-docs/user/changelog.md` | 変更履歴。次の版の変更は Unreleased に書く |
 
-## 関連ドキュメント
-
-- `.claude/rules/documentation.md` — ドキュメント管理規約
-- `.claude/rules/issue-workflow.md` — Issue 駆動ワークフロー
+作業ごとの計画と完了条件はリポジトリに置かず、GitHub Issue の `## DoD` に書く（→ `.claude/rules/definition-of-done.md`）。

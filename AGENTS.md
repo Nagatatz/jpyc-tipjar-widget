@@ -57,10 +57,10 @@ make update-po                  # 英語ソース変更後に日本語 .po を�
 | [`testing`](.claude/rules/testing.md) | 常時 | 曖昧な指示を検証可能なゴールに変換、3 回失敗したら相談 |
 | [`issue-pr-reference`](.claude/rules/issue-pr-reference.md) | 常時 | 文章中の Issue は 📋 + inline code、PR は 🔀 + リンクで区別 |
 | [`documentation`](.claude/rules/documentation.md) | 常時 | ドキュメントは日英必須、英語が正 |
-| [`code-comments`](.claude/rules/code-comments.md) | 常時 | ドキュメントコメントの付け方 |
-| [`minimal-change`](.claude/rules/minimal-change.md) | 常時 | 要求を満たす最小の差分、ついで改善を混ぜない |
-| [`delegate-investigation`](.claude/rules/delegate-investigation.md) | 常時 | 調査の多いタスクは subagent に分ける |
 | [`test-authoring`](.claude/rules/test-authoring.md) | ソースファイル | コード変更にはテストを作成・更新、配置と命名 |
+| [`code-comments`](.claude/rules/code-comments.md) | ソースファイル | 周囲に合わせ、名前から復元できない「なぜ」だけを書く |
+| [`minimal-change`](.claude/rules/minimal-change.md) | ソースファイル | 要求を満たす最小の差分、ついで改善を混ぜない |
+| [`github-actions`](.claude/rules/github-actions.md) | `.github/workflows/**` ほか | 外部 action は SHA 固定 + バージョンコメント |
 
 「ソースファイル」は各ルールの `paths:` に一致するファイル。正確な条件は各ルールの frontmatter を確認する。
 
