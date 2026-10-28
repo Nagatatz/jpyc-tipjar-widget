@@ -17,9 +17,9 @@
 
 優先度の高い順:
 
-1. **agent**: 6 体（code-reviewer / build-resolver / security-reviewer / quick-search / debugger / release-manager）
-2. **skill (auto-invoke 対象)**: bash-safety / worktree-safety / context-management / token-optimization / typescript-conventions / pr-summary / deep-research など
-3. **skill (手動起動)**: steering / git-workflow / archive-steering など — auto-invoke 評価不要、ワークフロー完遂率で評価
+1. **agent**: 6 体（code-reviewer / build-resolver / security-reviewer / debugger / release-manager / commit-advisor）
+2. **skill (auto-invoke 対象)**: bash-safety / worktree-safety / context-management / delegate-investigation / typescript-conventions / pr-summary など
+3. **skill (手動起動)**: git-workflow / catchup など — auto-invoke 評価不要、ワークフロー完遂率で評価
 
 ## 評価指標
 

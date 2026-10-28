@@ -16,17 +16,15 @@ disable-model-invocation: true
 
 - `.claude/session-state.md` — PreCompact フックが保存した最新状態
 
-### 2. アクティブなステアリングの特定
+### 2. 作業中の Issue の特定
 
-`.steering/` 内の最新ディレクトリを特定し、以下を Read で読み込む:
+作業中の Issue を、次の順で探す（見つかった時点で止める）:
 
-```bash
-ls -dt .steering/2026* | head -1
-```
+1. `.claude/session-state.md` やブランチ名・直近のコミットに出てくる Issue 番号
+2. 現在のブランチの PR が参照する Issue: `gh pr view --json closingIssuesReferences -q '.closingIssuesReferences[].number'`
+3. 自分に割り当てられた open の Issue: `gh issue list --assignee @me`
 
-- `tasklist.md` — 現在の進捗（`[ ]` / `[x]` の状態）
-- `requirements.md` — 要件の概要
-- `design.md` — 設計の概要
+見つかった Issue を `gh issue view <番号> --comments` で読み、背景・方針・DoD（`[ ]` / `[x]` の状態）・途中経過のコメントを把握する。特定できなければユーザーに番号を聞く。
 
 ### 3. Git 状態の確認
 
@@ -44,10 +42,10 @@ ls -dt .steering/2026* | head -1
 ## セッション復元サマリー
 
 **ブランチ:** <現在のブランチ>
-**ステアリング:** <アクティブなステアリングディレクトリ>
-**進捗:** <完了タスク数>/<全タスク数> タスク完了
+**Issue:** <作業中の Issue 番号とタイトル>
+**進捗:** DoD <完了項目数>/<全項目数> 完了
 **直近の変更:** <変更ファイルリスト>
 
 ### 次のアクション
-- <tasklist.md の次の未完了タスク>
+- <DoD の次の未完了の項目>
 ```

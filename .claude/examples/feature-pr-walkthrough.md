@@ -5,74 +5,41 @@
 ## シナリオ
 
 - **要求:** "ユーザーがログイン画面からパスワードリセットをリクエストできるようにする"
-- **規模判定:** 複数ファイル / 不慣れな領域 → steering ワークフロー（→ `.claude/rules/permission-modes.md`）
+- **規模判定:** 複数ファイル / 不慣れな領域 → Issue に DoD を書き、worktree で実装（→ `permission-modes` skill）
 
 ## Phase 1: 計画（コード着手前）
 
-### 1.1 steering ディレクトリ作成
+### 1.1 Issue の本文（抜粋）
 
-```bash
-mkdir -p .steering/20260512-001-password-reset
-```
-
-### 1.2 requirements.md（抜粋）
+背景・方針・DoD を 1 つの Issue に書く（フォーマットは `git-workflow` skill の issue モード）。
 
 ```markdown
-# パスワードリセット機能 要件
-
-## 動機
+## 背景
 - セキュリティ: パスワードを覚えていないユーザーが安全にアクセス復旧できる
 - UX: サポート問い合わせの 30% がパスワード関連 (運用データ) → セルフサービス化
 
-## 受け入れ条件
-- [ ] ログイン画面に「パスワードを忘れた」リンクが存在する
-- [ ] メール入力後、登録済みなら 1 時間有効のリセットトークンを生成・送信する
-- [ ] 未登録メールでも同じ応答 (アカウント存在の漏洩防止)
-- [ ] トークンは 1 回使用で無効化される
-- [ ] レート制限: 同一 IP から 5 リクエスト/時間
-
-## 非機能要件
-- リセットメール送信は p99 < 2 秒
-- トークン生成は CSPRNG ベース (Node.js crypto.randomBytes)
-```
-
-### 1.3 design.md（抜粋）
-
-```markdown
-## アーキテクチャ
+## 方針
 - POST /api/auth/password-reset/request → メール送信
 - POST /api/auth/password-reset/confirm → トークン検証 + パスワード更新
-
-## DB 変更
 - password_reset_tokens テーブル新設 (id, user_id, token_hash, expires_at, used_at)
-
-## セキュリティ判断
-- トークンは平文保存せず SHA-256 ハッシュで保存
+- トークンは CSPRNG (crypto.randomBytes) で生成し、平文保存せず SHA-256 ハッシュで保存
 - レスポンス時間を一定化 (タイミング攻撃対策)
+
+## DoD
+- [ ] ログイン画面に「パスワードを忘れた」リンクが存在する（検証: E2E テスト）
+- [ ] 登録済みメールなら 1 時間有効のリセットトークンを生成・送信する（検証: PasswordResetService テスト）
+- [ ] 未登録メールでも同じ応答・同等の応答時間になる（検証: PasswordResetService テスト）
+- [ ] トークンは 1 回使用で無効化される（検証: エンドポイント統合テスト）
+- [ ] 同一 IP から 5 リクエスト/時間を超えると 429（検証: エンドポイント統合テスト）
+- [ ] リセットメール送信が p99 < 2 秒（検証: 負荷テスト）
+- [ ] テスト: Repository / Service / エンドポイント統合テストを追加し `npm test` が全件パス
+- [ ] ドキュメント: sphinx-docs/user/ の機能ページ、README の Features 節、AGENTS.md のアーキテクチャ節
+
+## 対象外
+- メール以外の通知チャネル (SMS / Slack)
 ```
 
-### 1.4 tasklist.md
-
-```markdown
-# パスワードリセット タスクリスト
-
-- [ ] DB マイグレーション作成 (password_reset_tokens テーブル)
-- [ ] PasswordResetTokenRepository 実装
-- [ ] PasswordResetTokenRepository テスト
-- [ ] PasswordResetService 実装 (リクエスト処理 + 確認処理)
-- [ ] PasswordResetService テスト (受け入れ条件 5 件 + タイミング攻撃テスト)
-- [ ] POST /api/auth/password-reset/request エンドポイント実装
-- [ ] POST /api/auth/password-reset/confirm エンドポイント実装
-- [ ] エンドポイント統合テスト
-- [ ] ログイン画面に「パスワードを忘れた」リンク追加 (UI 変更)
-- [ ] レート制限ミドルウェア適用
-- [ ] sphinx-docs/user/ に機能ページ追加
-- [ ] README.md Features 節を更新
-- [ ] CLAUDE.md (アーキテクチャ節) を更新
-- [ ] main へのマージ
-```
-
-→ **ユーザー承認待ち**（→ `.claude/rules/steering-workflow.md`）
+→ **ユーザーが DoD を承認してから着手**（→ `.claude/rules/definition-of-done.md` Phase 1）
 
 ## Phase 2: 実装（worktree 隔離）
 
@@ -99,11 +66,10 @@ mkdir -p .steering/20260512-001-password-reset
    (UI 変更のみ = 1 コミット)
 
 5. 📝 Document password reset flow in user guide and README
-   (sphinx-docs + README + CLAUDE.md = 1 ドキュメント更新コミット)
-
-6. 📝 Mark password-reset tasklist complete and prepare merge
-   (tasklist.md の `[x]` 一括更新 = マージ直前の最終コミット)
+   (sphinx-docs + README + AGENTS.md = 1 ドキュメント更新コミット)
 ```
+
+DoD の項目は、満たしたことを確かめた都度 Issue の本文で `[x]` にする（コミットには含めない）。
 
 ### コメント規約準拠例
 
@@ -139,24 +105,23 @@ async requestPasswordReset(email: string): Promise<void> {
 - [ ] `npm run typecheck` エラー 0
 - [ ] `npm run lint` 警告 0
 - [ ] `npm run build` 成功
-- [ ] tasklist.md 全項目 `[x]`
-- [ ] セキュリティ関連変更につき `security-review` skill で点検
+- [ ] Issue の DoD が全項目 `[x]`、PR 本文に `Closes #<Issue 番号>`
+- [ ] セキュリティ関連変更につき `redblue-audit` skill で点検
 
 ## Phase 4: マージとクリーンアップ
 
-→ `.claude/rules/steering-workflow.md`「worktree マージ・クリーンアップ手順」に従い、CWD を main へ移動 → マージ → worktree 削除 → ブランチ削除 → 検証 3 点を実施。
+→ `worktree-safety` skill のマージ・クリーンアップ手順に従い、CWD を main へ移動 → マージ → worktree 削除 → ブランチ削除 → 検証 3 点を実施。
 
 ## ポイント
 
 - **検証手段の併設:** 各コミットに対応テストが付随（→ Verification-first 原則）
 - **コミット粒度:** UI / ロジック / docs を分離し、レビュー負荷を最小化
 - **YAGNI:** 拡張可能性は将来の要求が来てから対応
-- **ドキュメント同期:** sphinx-docs / README / CLAUDE.md を同じ PR で更新
+- **ドキュメント同期:** sphinx-docs / README / AGENTS.md を同じ PR で更新
 
 ## 関連規約
 
-- `.claude/rules/steering-workflow.md` — ワークフロー全体
-- `.claude/rules/definition-of-done.md` — Phase 1〜5 完了定義
+- `.claude/rules/definition-of-done.md` — Issue の DoD と Phase 1〜5 完了定義
 - `.claude/rules/testing.md` — テスト規約と検証可能ゴール変換
 - `.claude/rules/minimal-change.md` — YAGNI + Surgical Changes
-- `.claude/rules/documentation.md` — ドキュメント更新規約
+- `.claude/rules/definition-of-done.md` Phase 3 — ドキュメント更新（旧 documentation.md を統合）

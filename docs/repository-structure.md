@@ -6,7 +6,7 @@
 
 ```
 <project-root>/
-├── CLAUDE.md                   # Claude Code の常時ロードコンテキスト
+├── AGENTS.md                   # エージェント共通の入口（概要・コマンド・ルール索引）
 ├── .claude/
 │   ├── agents/                 # サブエージェント定義
 │   ├── commands/               # スラッシュコマンド
@@ -35,13 +35,13 @@
 
 | ファイル | 役割 |
 |---------|------|
-| `CLAUDE.md` | Claude Code 用の常時コンテキスト。`@import` で `.claude/rules/` をロード |
+| `AGENTS.md` | エージェント共通の入口。概要・コマンド・`.claude/rules/` の索引だけを置く |
+| `CLAUDE.md` | `@AGENTS.md` の 1 行だけ（上位に `hobby/CLAUDE.md` があると Claude Code が `AGENTS.md` を読まないため） |
 | `.claude/settings.json` | hooks 登録 / 権限 / statusLine 設定 |
-| `.steering/<日付>-<連番>-<タイトル>/` | 作業単位のステアリングドキュメント |
 | `docs/product-requirements.md` | プロダクト要求定義書（任意） |
 | `docs/architecture.md` | 技術仕様書（任意） |
 
 ## 関連ドキュメント
 
 - `.claude/rules/documentation.md` — ドキュメント管理規約
-- `.claude/rules/steering-workflow.md` — ステアリングワークフロー
+- `.claude/rules/issue-workflow.md` — Issue 駆動ワークフロー

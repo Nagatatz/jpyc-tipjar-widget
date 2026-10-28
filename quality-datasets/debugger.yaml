@@ -31,8 +31,8 @@ cases:
   # ───── 発火すべきでないケース（false-positive 検出） ─────
   - id: 6
     prompt: "新しいダッシュボード画面を追加したい"
-    expected_invocation: steering
-    notes: 機能追加はバグ調査ではなく steering ワークフロー
+    expected_invocation: none
+    notes: 機能追加はバグ調査ではない（Issue に DoD を書いて実装する作業）
 
   - id: 7
     prompt: "pnpm build が型エラーで失敗する、直して"

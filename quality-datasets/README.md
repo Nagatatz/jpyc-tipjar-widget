@@ -51,9 +51,9 @@ bash scripts/evaluate-skills.sh quality-datasets/<対象>.yaml
 
 ## 拡充の優先度
 
-22 skill / 6 agent すべてに対応データセットを用意するのは現実的ではない。次の優先度で拡充する:
+25 skill / 6 agent すべてに対応データセットを用意するのは現実的ではない。次の優先度で拡充する:
 
-1. **高:** auto-invoke が頻繁な skill（`steering`, `git-workflow`, `add-feature`）
+1. **高:** auto-invoke が頻繁な skill（`git-workflow`, `delegate-investigation`）
 2. **中:** description リライト履歴があるもの（`docs/audits/2026-05-12-skill-descriptions.md` で更新済みの 7 件）
 3. **低:** `disable-model-invocation: true` の skill（auto-invoke 評価対象外。手動起動を促す description としての品質のみ評価）
 

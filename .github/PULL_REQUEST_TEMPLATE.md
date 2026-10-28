@@ -18,9 +18,11 @@
 
 - [ ] テストが全件パスすること
 - [ ] 型チェック / リンターが通ること
-- [ ] 関連ドキュメント (`CLAUDE.md`, `README.md`, `docs/`, `sphinx-docs/`) を必要に応じて更新済み
-- [ ] `.steering/` のタスクリストを `[x]` に更新済み
+- [ ] 関連ドキュメント (`AGENTS.md`, `README.md`, `docs/`, `sphinx-docs/`) を必要に応じて更新済み
+- [ ] 対応する Issue の DoD が全項目 `[x]`
 
-## 関連 Issue / Steering
+## 関連 Issue
 
-<!-- closes #123, refs #456, .steering/YYYYMMDD-NNN-... -->
+Closes #
+
+<!-- refs #456 など。DoD は Issue 側に書く -->

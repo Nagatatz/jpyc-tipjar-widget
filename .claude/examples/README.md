@@ -9,7 +9,7 @@
 | ファイル | 内容 |
 |---------|------|
 | `commit-message-examples.md` | 9 種の絵文字プレフィックス別、模範的なコミットメッセージ例 |
-| `feature-pr-walkthrough.md` | 機能追加 PR の全工程（steering → 実装 → テスト → ドキュメント → コミット粒度）模範例 |
+| `feature-pr-walkthrough.md` | 機能追加 PR の全工程（Issue の DoD → 実装 → テスト → ドキュメント → コミット粒度）模範例 |
 | `skill-creation-example.md` | 新規 skill の SKILL.md 雛形 + description 3 基準準拠例 |
 | `hook-creation-example.md` | 新規 hook スクリプトの雛形 + settings.json 登録例 |
 

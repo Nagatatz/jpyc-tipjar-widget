@@ -1,11 +1,11 @@
 ---
-description: Git ワークフロー（ブランチ作成 / 絵文字プレフィックス付きコミット / PR 作成 / 状態確認）を自動化するスキル。「コミットして」「ブランチ切って」「PR 作って」のリクエストに proactively 使用。プロジェクトの `git-conventions.md` 規約（絵文字 9 種、ブランチ命名）に準拠。
+description: Git ワークフロー（DoD 付き Issue の作成と更新 / ブランチ作成 / 絵文字プレフィックス付きコミット / PR 作成 / 状態確認）を自動化するスキル。「Issue 作って」「DoD を書いて」「DoD を更新して」「コミットして」「ブランチ切って」「PR 作って」のリクエストに proactively 使用。プロジェクトの `git-conventions.md` 規約（絵文字 9 種、ブランチ命名）に準拠。
 allowed-tools: Bash, Read, Glob, Grep
 ---
 
 # Git ワークフロー
 
-CLAUDE.md の Git コミット規約に準拠したブランチ作成、コミット、PR 作成を支援するスキル。
+AGENTS.md の Git コミット規約と `definition-of-done.md` に準拠した Issue の作成、ブランチ作成、コミット、PR 作成を支援するスキル。
 
 ## 現在の状態（自動取得）
 
@@ -16,6 +16,8 @@ CLAUDE.md の Git コミット規約に準拠したブランチ作成、コミ�
 
 ## 使い方
 
+- `/git-workflow issue <タイトル>` — DoD 付きの Issue を作成する
+- `/git-workflow issue check <番号>` — 満たした DoD の項目を `[x]` に更新する
 - `/git-workflow branch <名前>` — 命名規則に従うブランチを作成
 - `/git-workflow commit` — 変更内容を分析し、絵文字付きコミットメッセージを生成・実行
 - `/git-workflow commit -m "メッセージ"` — メッセージ指定 + 絵文字自動付与
@@ -23,6 +25,61 @@ CLAUDE.md の Git コミット規約に準拠したブランチ作成、コミ�
 - `/git-workflow status` — ブランチ状態 + コミット規約リマインダーを表示
 
 引数なしの `/git-workflow` は `status` として動作する。
+
+---
+
+## モード: issue
+
+### 目的
+
+作業の完了条件（DoD）を Issue の本文に置く（→ `definition-of-done.md`）。DoD は会話ではなく Issue に残すので、`/clear` の後や別の agent に引き継いだ後も同じ完了条件で進められる。
+
+### Issue 本文のフォーマット
+
+```markdown
+## 背景
+- なぜこの作業が要るか
+
+## 方針
+- 採るアプローチ。解釈の幅があれば仮定とトレードオフ
+
+## DoD
+- [ ] <確かめられる完了条件>（検証: `<コマンド>`）
+- [ ] テスト: <追加・更新するテスト>
+- [ ] ドキュメント: <更新するファイル>（無ければ「影響なし」と書く）
+
+## 対象外
+- やらないこと
+```
+
+DoD の各項目は、テストやコマンドの結果で満たしたか判定できる形にする（→ `testing.md`）。
+
+### 手順
+
+1. 既存の Issue があるか確認する: `gh issue list --search "<キーワード>"`
+2. 無ければ上のフォーマットで本文を作り、ユーザーに DoD の承認を得る
+3. 作成する:
+
+```bash
+gh issue create --title "<タイトル>" --body-file <本文のファイル>
+```
+
+4. 既存の Issue に DoD が無ければ、本文に `## DoD` 節を追記して承認を得る（手順は次の check と同じ）
+
+### check: DoD の更新
+
+満たした項目を `[x]` にする。範囲が増えたら項目を追記する。本文は丸ごと置き換わるので、取得 → 編集 → 書き戻しの順に行う。
+
+```bash
+f=$(mktemp)
+gh issue view <番号> --json body -q .body > "$f"
+# "$f" の該当行を `- [x]` に編集する
+gh issue edit <番号> --body-file "$f"
+rm -f "$f"
+```
+
+- 満たしたか確かめていない項目は `[x]` にしない
+- 未完了の項目を残して作業を止めるときは、何が残っているかを Issue にコメントする
 
 ---
 
@@ -36,12 +93,14 @@ CLAUDE.md の Git コミット規約に準拠したブランチ作成、コミ�
 
 | プレフィックス | 用途 | 例 |
 |--------------|------|-----|
-| `feature/` | 新機能追加 | `feature/user-authentication` |
-| `fix/` | バグ修正 | `fix/pdf-parse-error` |
-| `refactor/` | リファクタリング | `refactor/repository-pattern` |
-| `docs/` | ドキュメント更新 | `docs/update-architecture` |
-| `test/` | テスト追加・修正 | `test/edge-cases` |
-| `chore/` | 設定・依存関係等 | `chore/update-dependencies` |
+| `feature/` | 新機能追加 | `feature/12-amount-presets` |
+| `fix/` | バグ修正 | `fix/15-qr-fallback` |
+| `refactor/` | リファクタリング | `refactor/18-payment-uri` |
+| `docs/` | ドキュメント更新 | `docs/20-sphinx-quickstart` |
+| `test/` | テスト追加・修正 | `test/22-tip-amount` |
+| `chore/` | 設定・依存関係等 | `chore/3-issue-workflow` |
+
+プレフィックスの後に Issue 番号を付ける（`<prefix>/<Issue 番号>-<題>`）。
 
 ### 手順
 
@@ -58,7 +117,7 @@ git branch --show-current
 5. ブランチを作成・チェックアウトする:
 
 ```bash
-git checkout -b <ブランチ名>
+git checkout -b <ブランチ名> origin/master
 ```
 
 ---
@@ -67,7 +126,7 @@ git checkout -b <ブランチ名>
 
 ### 目的
 
-変更内容を分析し、CLAUDE.md の絵文字規約に従ったコミットメッセージでコミットする。
+変更内容を分析し、AGENTS.md の絵文字規約に従ったコミットメッセージでコミットする。
 
 ### 絵文字判定ルール
 
@@ -99,7 +158,7 @@ git diff --cached
 
 #### 2. ステージング
 
-**MUST**: `git add .` や `git add -A` は使用しない。個別ファイル指定で `git add` する。
+個別ファイル指定で `git add` する（`git add .` / `-A` は秘密情報やビルド成果物を巻き込むため、validate-bash hook もブロックする）。
 
 変更ファイルを分析し、以下を除外する:
 - `.env` / `credentials.json` 等の秘密情報ファイル
@@ -125,14 +184,16 @@ git add src/path/to/changed/file.ext
 git commit -m "$(cat <<'EOF'
 ✨ Add user authentication
 
-Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>
+Co-Authored-By: Claude <noreply@anthropic.com>
 EOF
 )"
 ```
 
+帰属行は、ハーネスが提示するもの（モデル名入り）があればそれを使う。
+
 #### 5. push に関するルール
 
-**NEVER**: ユーザーから明示的に指示がない限り、`git push` は実行しない。
+`git push` はユーザーの明示的な指示があるときだけ実行する（push は外部に公開される操作で取り消しにくいため）。
 
 コミット完了後、push が必要かどうかをユーザーに確認するメッセージを表示する。
 
@@ -150,17 +211,21 @@ EOF
 
 ```bash
 git branch --show-current
-git log --oneline main..HEAD
-git diff main...HEAD --stat
+git log --oneline origin/HEAD..HEAD
+git diff origin/HEAD...HEAD --stat
 ```
 
-#### 2. PR タイトルの生成
+#### 2. Issue の DoD の確認
+
+対応する Issue の DoD が全項目 `[x]` か確認する（`gh issue view <番号>`）。未完了の項目があれば、PR を作る前にユーザーに伝える。
+
+#### 3. PR タイトルの生成
 
 - コミット履歴を分析し、変更の主目的を特定する
 - 70文字以内のタイトルを生成する
 - 絵文字は PR タイトルには含めない
 
-#### 3. PR 本文の生成
+#### 4. PR 本文の生成
 
 以下のフォーマットで PR 本文を作成する:
 
@@ -171,6 +236,8 @@ git diff main...HEAD --stat
 ## Changes
 - 変更されたファイルとその内容
 
+Closes #<Issue 番号>
+
 ## Test plan
 - [ ] ビルドが成功すること
 - [ ] テストが全件パスすること
@@ -179,7 +246,7 @@ git diff main...HEAD --stat
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
 ```
 
-#### 4. リモートへの push
+#### 5. リモートへの push
 
 PR 作成前にリモートへ push する（ユーザーに確認後）:
 
@@ -187,7 +254,7 @@ PR 作成前にリモートへ push する（ユーザーに確認後）:
 git push -u origin <ブランチ名>
 ```
 
-#### 5. PR 作成
+#### 6. PR 作成
 
 ```bash
 gh pr create --title "タイトル" --body "$(cat <<'EOF'
