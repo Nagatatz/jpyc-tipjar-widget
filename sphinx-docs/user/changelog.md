@@ -10,7 +10,7 @@
 
 ### Changed
 
--
+- Raise the minimum versions of the runtime dependencies to `viem` `^2.57.12` and `@rescript/runtime` `^12.3.1`, and build with `rescript` 12.3.1. The widget's API and behavior are unchanged.
 
 ### Fixed
 
@@ -19,6 +19,7 @@
 ### Internal
 
 - Pin the Docs and Release workflows to Node.js `^24.22.1`, which fixes the bundled Brotli decompression vulnerability (CVE-2026-111497, "Node2Shell" / "HTTP2Shell"). The published widget is unaffected: it runs in the browser and has no Brotli-decoding dependencies.
+- Bump the docs accessibility checker `pa11y-ci` to `^5.0.0` (pa11y 10, Puppeteer 25; requires Node.js 22.13 or later).
 
 ## 0.1.3 (2026-06-19)
 
