@@ -49,7 +49,6 @@
     ".claude/settings.json.template",
     ".mcp.json.template",
     "docs/mcp-servers.md",
-    "docs/migration-to-plugins.md",
     "docs/quality-measurement.md",
     "docs/repository-structure.md",
     "scripts/evaluate-skills.sh",
