@@ -2,7 +2,7 @@
 name: build-resolver
 description: ビルドエラー / コンパイルエラー / 型エラー / テスト失敗の根本原因を分析・分類し、修正案を提示する。ビルド失敗・CI 失敗・"fix the build" のリクエストが発生したときに proactively 使用。
 tools: Read, Glob, Grep, Bash, Edit
-model: sonnet
+model: inherit
 isolation: worktree
 skills:
   - bash-safety
@@ -17,7 +17,7 @@ memory: project
 
 ### ステップ 1: エラーの再現
 
-プロジェクトのビルドコマンドを実行し、出力をキャプチャする。適切なビルドコマンドは CLAUDE.md を参照。
+プロジェクトのビルドコマンドを実行し、出力をキャプチャする。適切なビルドコマンドは AGENTS.md を参照。
 
 ビルドが成功した場合は、エラーが見つからなかったことを報告する。
 

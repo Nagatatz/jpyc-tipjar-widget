@@ -4,35 +4,31 @@
 # Informational only (exit 0 always).
 
 STATE_FILE="${CLAUDE_PROJECT_DIR:-.}/.claude/session-state.md"
-STEERING_DIR="${CLAUDE_PROJECT_DIR:-.}/.steering"
 
-# Collect incomplete tasks from all active tasklists (excluding archive/)
-INCOMPLETE_TASKS=$(
-  find "$STEERING_DIR" -name "tasklist.md" -type f 2>/dev/null \
-    | grep -v '/archive/' \
-    | sort \
-    | while IFS= read -r f; do
-        items=$(grep '^\- \[ \]' "$f" 2>/dev/null)
-        if [ -n "$items" ]; then
-          echo ""
-          echo "#### $(echo "$f" | sed "s|${CLAUDE_PROJECT_DIR:-.}/||")"
-          echo "$items"
-        fi
-      done
-)
+# Print stdin, or "none" when it is empty (`cmd | head || echo none` never prints none).
+or_none() { out=$(cat); if [ -n "$out" ]; then printf '%s' "$out"; else printf 'none'; fi; }
 
-cat > "$STATE_FILE" << EOF
+BRANCH=$(git branch --show-current 2>/dev/null)
+
+# The DoD lives in the GitHub Issue, so record only where to look; calling gh here
+# would make compaction wait on the network. Issue numbers come from the branch
+# name and recent commit subjects (e.g. feature/123-x, "Fix y (#123)").
+ISSUE_HINTS=$( {
+    printf '%s\n' "$BRANCH" | grep -oE '(^|/)[0-9]+(-|$)'
+    git log -10 --format=%s 2>/dev/null | grep -oE '#[0-9]+'
+  } | grep -oE '[0-9]+' | sort -un | head -5 | tr '\n' ' ' | sed 's/ $//')
+
+cat > "$STATE_FILE" << STATE
 # Session State (auto-saved before compaction)
 
-- **Branch:** $(git branch --show-current 2>/dev/null || echo "unknown")
-- **Worktrees:** $(git worktree list 2>/dev/null | grep -v "^$" || echo "none")
-- **Modified files:** $(git diff --name-only 2>/dev/null | head -20 || echo "none")
-- **Staged files:** $(git diff --cached --name-only 2>/dev/null | head -20 || echo "none")
-- **Active steering:** $(ls -d "$STEERING_DIR"/2* 2>/dev/null | tail -1 || echo "none")
+- **Branch:** ${BRANCH:-unknown}
+- **Worktrees:** $(git worktree list 2>/dev/null | grep -v "^$" | or_none)
+- **Modified files:** $(git diff --name-only 2>/dev/null | head -20 | or_none)
+- **Staged files:** $(git diff --cached --name-only 2>/dev/null | head -20 | or_none)
+- **Issue number candidates:** $(printf '%s' "$ISSUE_HINTS" | or_none)
 - **Timestamp:** $(date '+%Y-%m-%d %H:%M:%S')
 
-## Incomplete Tasks
-${INCOMPLETE_TASKS:-"(none)"}
-EOF
+The DoD is in the GitHub Issue: check it with \`gh issue view <number>\`.
+STATE
 
 exit 0

@@ -1,31 +1,43 @@
 ---
-description: セッション中に得た非自明な発見・ワークアラウンド・プロジェクト固有のパターンを `.claude/rules/learnings.md` に記録するスキル。`/learn` で起動。「これを学びとして記録して」「次回も覚えておいて」「learnings に追加して」リクエスト、または「ハマったポイント / 罠 / 非自明な仕様」が会話で出てきたタイミングで本スキルを案内する。
+description: セッション中に得た知見のうち **チームで共有すべきもの** を `.claude/rules/learnings.md` に記録するスキル。`/learn` で起動。「これを学びとして記録して」「チームに共有したい」「learnings に追加して」リクエスト時に使用。個人的・環境固有の学びは公式 Auto memory が自動で拾うため対象外（→ `docs/memory-and-learning.md`）。
 allowed-tools: Read, Write, Edit, Glob
 disable-model-invocation: true
 ---
 
 # Learn スキル
 
-セッション中に得た知見を抽出し、`.claude/rules/learnings.md` に永続化するスキルです。`/learn` で明示的に呼び出してください。
+セッション中に得た知見のうち、**チームで共有する価値があるもの**を `.claude/rules/learnings.md` に永続化するスキルです。`/learn` で明示的に呼び出してください。
+
+## まず Auto memory との住み分けを判断する
+
+Claude Code の Auto memory は既定で有効で、ビルドコマンド・デバッグ知見・環境の癖といった学びを **Claude が自動的に** `~/.claude/projects/<project>/memory/` へ書き溜めている。`/learn` はその代替ではない。
+
+| 問い | Yes なら |
+|------|---------|
+| これは自分のマシン / 自分の作業環境だけの話か？ | **何もしない**。Auto memory が拾う（`/memory` で確認できる） |
+| チームの他のメンバーにも同じ判断をしてほしいか？ | `/learn` で `learnings.md` に記録する |
+| すでに恒久的な規約と言える水準か？ | `/add-rule` で独立したルールにする |
+
+決め手は **git で共有されるか**。Auto memory はマシンローカルで共有されない。逆に個人的な気付きを `learnings.md` に入れると、チーム全員の常時ロードを太らせる。詳細は `docs/memory-and-learning.md`。
 
 ## 保存先
 
-`.claude/rules/learnings.md` に記録する。このファイルは `.claude/rules/` 配下にあるため、Claude Code が自動的に読み込む。CLAUDE.md には記録しない（CLAUDE.md は簡潔に保つ方針のため）。
+`.claude/rules/learnings.md` に記録する。`.claude/rules/` 配下のファイルは `@import` を書かなくても Claude Code が自動ロードするため、AGENTS.md への追記は不要。
 
 ## 記録対象
 
-以下のカテゴリに該当する知見を抽出する:
+チーム共有価値があることを確認したうえで、以下のカテゴリに該当する知見を抽出する:
 
 | カテゴリ | 例 |
 |---------|-----|
-| デバッグテクニック | 「このエラーは○○が原因で、△△で解決する」 |
 | ワークアラウンド | 「ライブラリXのバグにより、△△の回避策が必要」 |
 | プロジェクト固有パターン | 「このプロジェクトでは○○パターンを使う」 |
-| 環境依存の注意点 | 「macOS では○○の設定が必要」 |
-| パフォーマンス知見 | 「○○は△△より3倍速い」 |
+| 誰の環境でも踏む地雷 | 「このビルドは Node 24 未満だと無言で失敗する」 |
+| 設計判断の背景 | 「○○を採用しなかったのは△△の制約があるため」 |
 
 ## 記録しないもの
 
+- **Auto memory が既に拾っている個人的・機械的な発見**（自分のマシン固有の設定、個人の作業手順、単発のデバッグ経緯）
 - 一般的なプログラミング知識（言語仕様、標準ライブラリの使い方）
 - 一時的な問題（ネットワーク障害、一時的なAPI停止）
 - 既にルールファイルに記載済みの情報
@@ -49,12 +61,12 @@ disable-model-invocation: true
 
 ## ライフサイクル（成長制御）
 
-`learnings.md` は `.claude/rules/` 配下にあり**毎セッション @import される固定オーバーヘッド**になりうる。`claude-md-hygiene.md` の肥大化警告に従い、無制限に成長させない。記録時に必ず以下を守る:
+`learnings.md` は `.claude/rules/` 配下にあり**毎セッション自動ロードされる固定オーバーヘッド**になりうる。`claude-md-hygiene` skill の肥大化警告に従い、無制限に成長させない。記録時は以下を守る:
 
 - **重複・統合**: 追記前に既存エントリを読み、同義のものがあれば新規追加せず統合する（日付だけ更新）。
 - **サイズ上限**: 既定 **400 行**。超過したら剪定する（下記）。
 - **昇格（promote）**: 同種の知見が 3 件以上たまった、または恒常的な規約に育った項目は、`learnings.md` から抜き出して `.claude/rules/` の独立ルール（または該当 skill）に昇格させ、元エントリは削除する。一過性メモと恒久規約を混在させない。
-- **剪定（prune）**: 古い・参照されない月のエントリは `scripts/prune-learnings.sh` で `.claude/rules/learnings-archive-YYYY-MM.md` に退避する（archive は @import されないため常時ロードから外れる）。
+- **剪定（prune）**: 古い・参照されない月のエントリは `scripts/prune-learnings.sh` で `.claude/learnings-archive/YYYY-MM.md` に退避する（`.claude/rules/` の外なので常時ロードから外れる）。
 
 ```bash
 bash scripts/prune-learnings.sh            # 上限超過時のみ古い月を archive
@@ -63,7 +75,10 @@ bash scripts/prune-learnings.sh --dry-run  # 退避対象の確認のみ
 
 ## 使用タイミング
 
-- セッション終了前（重要な発見があった場合）
-- 難しいバグを解決した後
-- 新しいワークアラウンドを発見した後
-- ユーザーから「学習して」「覚えておいて」と指示された場合
+- チームの他メンバーも踏むであろう罠を発見した後
+- 新しいワークアラウンドを発見し、それが環境非依存だと確認できた後
+- ユーザーから「チームに共有して」「learnings に追加して」と指示された場合
+
+「覚えておいて」だけの指示は Auto memory の領分なので、本スキルを呼ばずに Claude が自動保存すればよい。
+
+複数の学びのまとめ、評価レポート由来の知見、skill / agent の description 改編を伴う場合は `retrospective-codify` を使う（本 skill は learnings.md への単発1行記録専用で、その記法の SSoT）。恒久的な規約として `.claude/rules/` に定着させたい場合は `add-rule` を使う。

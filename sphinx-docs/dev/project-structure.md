@@ -7,9 +7,8 @@ jpyc-tipjar-widget/
 ├── src/                  # Source code
 ├── docs/                 # Internal design documents
 ├── sphinx-docs/          # Public documentation (Sphinx)
-├── .steering/            # Steering workflow documents
 ├── .github/workflows/    # CI/CD workflows
-└── CLAUDE.md             # Development conventions
+└── AGENTS.md             # Development conventions (agent entry point)
 ```
 
 ## Source Code Organization

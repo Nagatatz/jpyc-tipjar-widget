@@ -1,7 +1,8 @@
 #!/bin/sh
 # pztn:260619 learnings.md の成長制御。上限超過時、現在月より古い月の
-#   エントリを .claude/rules/learnings-archive-YYYY-MM.md へ退避する。
-#   archive は CLAUDE.md から @import されないため、常時ロードから外れる。
+#   エントリを .claude/learnings-archive/YYYY-MM.md へ退避する。
+#   .claude/rules/ の外に置くため、退避したエントリは常時ロードされない。
+#   旧版が .claude/rules/learnings-archive-YYYY-MM.md に置いた archive は、実行時に移す。
 #
 # Usage: scripts/prune-learnings.sh [--dry-run] [--threshold=N]
 #   --dry-run      退避対象を表示するのみ（変更しない）
@@ -9,6 +10,7 @@
 set -eu
 
 RULES_DIR=".claude/rules"
+ARCHIVE_DIR=".claude/learnings-archive"
 FILE="$RULES_DIR/learnings.md"
 THRESHOLD="${LEARNINGS_MAX:-400}"
 DRY_RUN=false
@@ -19,6 +21,25 @@ for arg in "$@"; do
     --threshold=*) THRESHOLD="${arg#*=}" ;;
     *) echo "Unknown option: $arg" >&2; exit 1 ;;
   esac
+done
+
+# 旧版の archive（.claude/rules/ 内にあり毎セッションロードされていた）を移す
+for legacy in "$RULES_DIR"/learnings-archive-*.md; do
+  [ -f "$legacy" ] || continue
+  m=$(basename "$legacy" .md)
+  m=${m#learnings-archive-}
+  if [ "$DRY_RUN" = true ]; then
+    echo "[dry-run] would move $legacy -> $ARCHIVE_DIR/$m.md"
+    continue
+  fi
+  mkdir -p "$ARCHIVE_DIR"
+  if [ -f "$ARCHIVE_DIR/$m.md" ]; then
+    # 先頭の見出し（"# ..." とその後の空行）がある場合だけ落として追記する
+    awk 'NR == 1 && /^# / { h = 1; next } h && NR == 2 && /^$/ { next } { print }' "$legacy" >> "$ARCHIVE_DIR/$m.md" && rm "$legacy"
+  else
+    mv "$legacy" "$ARCHIVE_DIR/$m.md"
+  fi
+  echo "moved legacy archive $legacy -> $ARCHIVE_DIR/$m.md"
 done
 
 [ -f "$FILE" ] || { echo "No $FILE; nothing to prune."; exit 0; }
@@ -42,13 +63,14 @@ if [ "$LINES" -le "$THRESHOLD" ] && [ "$DRY_RUN" = false ]; then
 fi
 
 for m in $OLD_MONTHS; do
-  archive="$RULES_DIR/learnings-archive-$m.md"
+  archive="$ARCHIVE_DIR/$m.md"
   matches="$(grep -E "^- \[$m" "$FILE" || true)"
   count="$(printf '%s\n' "$matches" | grep -c . || true)"
   if [ "$DRY_RUN" = true ]; then
     echo "[dry-run] would move $count entries ($m) -> $archive"
     continue
   fi
+  mkdir -p "$ARCHIVE_DIR"
   if [ ! -f "$archive" ]; then
     printf '# Learnings archive %s\n\n' "$m" > "$archive"
   fi

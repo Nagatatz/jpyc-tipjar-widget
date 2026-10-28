@@ -6,7 +6,7 @@
 
 # Claude Code 関連の変更は全員の承認を必須にしたい場合は以下を有効化
 # .claude/        {{TEAM}}
-# CLAUDE.md       {{TEAM}}
+# AGENTS.md       {{TEAM}}
 
 # ドキュメント
 docs/           {{TEAM}}

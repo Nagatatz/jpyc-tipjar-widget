@@ -7,7 +7,7 @@
       "Bash(git log *)",
       "Bash(git branch *)",
       "Bash(git checkout -b *)",
-      "Bash(git checkout main)",
+      "Bash(git checkout master)",
       "Bash(git merge *)",
       "Bash(git branch -d *)",
       "Bash(git worktree *)",
@@ -97,9 +97,9 @@
         "matcher": ".*",
         "hooks": [
           {
-            "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/check-tasklist.sh",
-            "timeout": 10
+            "type": "prompt",
+            "prompt": "You are a verification gate for a coding session. Hook input: $ARGUMENTS\n\nDecide whether this turn may end.\n\nBlock ONLY when ALL of these hold:\n1. This turn modified source code (not only markdown, docs/, .claude/ or config files).\n2. No test, build, lint, or type-check command was run after the last code modification.\n3. No user message in this turn asked to skip or defer verification.\n\nWhen any of the three is uncertain, allow. Turns that only investigate, answer questions, run commands, or edit documentation must always be allowed.\n\nOutput contract — follow it exactly. Respond with a single JSON object and nothing else: no explanation, no preamble, no code fences.\n- To allow: {\"ok\": true}\n- To block: {\"ok\": false, \"reason\": \"<name the verification command that should run>\"}",
+            "timeout": 30
           }
         ]
       }
