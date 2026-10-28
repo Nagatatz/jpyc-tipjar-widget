@@ -1,5 +1,5 @@
 ---
-description: Bash で破壊的操作（rm, rmdir, rm -r, git worktree remove 等のディレクトリ削除や、リダイレクトでのファイル上書き）を実行する直前に必ず参照する。CWD が削除対象内にないかチェックし、危険コマンドを安全規約と照合する。
+description: Bash で破壊的操作（rm -r / rmdir / git worktree remove 等のディレクトリ削除、docker volume rm 等のデータ削除、リダイレクトでのファイル上書き）を実行する直前に参照する。CWD が削除対象内にないかの確認手順と、hook が自動 block する操作の一覧。
 allowed-tools: Read, Bash
 ---
 
@@ -23,3 +23,32 @@ CWD が削除されると Bash ツールのシェルプロセスが復旧不能�
 ### 重要: `git -C` は CWD 移動の代替にならない
 
 `git -C <path>` は git コマンドの実行ディレクトリを指定するだけで、シェルの CWD は変更しない。そのため、`git -C` で worktree remove や prune を実行しても、CWD が削除対象を指していればシェルは壊れる。**必ず `cd` で CWD 自体を移動すること。**
+
+## データを消す操作
+
+- `docker volume rm` / `docker compose down -v`: ボリューム内のデータ（ローカル DB 等）は復元できない。消してよいかを確認してから実行する。コンテナを止めたいだけなら `-v` を付けない
+- リダイレクト（`>`）での上書き: 既存ファイルを上書きする前に中身を確認する。追記なら `>>`
+
+## 自動 block されるもの
+
+`.claude/hooks/validate-bash.sh` が次を止める。引用符の外の `&&` / `||` / `;` / `|` / `&` / `( )` / `$( )` / 改行で区切って 1 つずつ見る。各コマンドは環境変数の代入・`sudo` / `command` / `env` / `xargs`・パス（`/bin/rm`）・git のグローバルオプション（`-C <dir>` 等）を外してから判定するため、それらの後ろに書いても止まる。引用符の中（`git commit -m "a; rm -rf b"`）は区切らない。
+
+| 操作 | 代わりに |
+|---|---|
+| `git add .` / `git add -A` / `--all` / `git add :/` | ファイルを個別に指定して `git add` |
+| `git push --force` / `-f` / `-uf` / `+main`（refspec） | rebase 後の出し直しは `--force-with-lease`（remote が動いていたら拒否されるため許可） |
+| `rm -rf`（`-Rf` など、フラグの大小・順序・位置を問わない） | 対象を確かめてから `rm -r` |
+| CWD が削除対象の中にある `git worktree remove` | 先にメインリポジトリへ `cd` |
+| worktree 内での `git branch -d` / `-D` | 先にメインリポジトリへ `cd` |
+
+## プロジェクト固有の危険操作
+
+配布先では、このプロジェクトで取り返しのつかない操作と安全な代替をここに追記する（例: 本番 DB へのマイグレーション、共有環境のリソース削除）。
+
+| 操作 | 何が起きるか | 代わりに |
+|---|---|---|
+| （例）`make db-reset` | ローカル DB を初期化し、シードも消える | 必要なら事前に `make db-dump` |
+
+## 関連
+
+- `worktree-safety` skill: worktree の削除順序・CWD 復旧手順の SSoT

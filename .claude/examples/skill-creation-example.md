@@ -1,6 +1,6 @@
 # Skill 作成模範例
 
-`.claude/skills/<name>/SKILL.md` の作り方をゴールドスタンダード水準で示す。本テンプレートの `claude-md-hygiene.md` / `audit-skill-descriptions.sh` の基準すべてに準拠する。
+`.claude/skills/<name>/SKILL.md` の作り方をゴールドスタンダード水準で示す。本テンプレートの `claude-md-hygiene` skill / `audit-skill-descriptions.sh` の基準すべてに準拠する。
 
 ## ディレクトリ構成
 
@@ -103,6 +103,6 @@ bash scripts/evaluate-skills.sh quality-datasets/<skill-name>.yaml
 
 ## 関連規約
 
-- `.claude/rules/claude-md-hygiene.md` — 健全性原則と肥大化検知
-- `.claude/rules/delegate-investigation.md` — subagent への調査分離
+- `.claude/skills/claude-md-hygiene/` — 健全性原則と肥大化検知（auto-invoke skill）
+- `.claude/skills/delegate-investigation/` — subagent への調査分離（auto-invoke skill）
 - `docs/audits/2026-05-12-skill-descriptions.md` — 過去の監査結果と改善履歴

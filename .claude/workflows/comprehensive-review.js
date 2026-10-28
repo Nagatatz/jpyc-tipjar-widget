@@ -16,6 +16,9 @@ export const meta = {
 }
 
 // レビュー観点。プロジェクトに合わせて増減してよい。
+// NOTE: 各観点の要約は SSoT の詳細版と対応する — security は .claude/agents/security-reviewer.md、
+//   correctness/maintainability は .claude/agents/code-reviewer.md。詳細な観点を更新する際は
+//   SSoT 側も併せて更新し、ドリフトを防ぐこと。
 const DIMENSIONS = [
   { key: 'correctness', prompt: 'ロジックの誤り・境界条件・例外処理の漏れを探せ。' },
   { key: 'security', prompt: '入力検証・認証認可・インジェクション・機密漏洩を探せ。' },
@@ -23,8 +26,10 @@ const DIMENSIONS = [
   { key: 'maintainability', prompt: '重複・過剰な抽象化・命名・テスト不足を探せ。' },
 ]
 
-const TARGET = args && args.length
-  ? `次のファイルのみを対象にせよ: ${args.join(', ')}`
+// 文字列 1 つ（"src/a.ts"）でも配列でも受ける。文字列のまま .join を呼ぶと TypeError になる
+const FILES = args ? [].concat(args) : []
+const TARGET = FILES.length
+  ? `次のファイルのみを対象にせよ: ${FILES.join(', ')}`
   : '現在のブランチの変更（git diff main...HEAD）を対象にせよ。'
 
 const FINDINGS_SCHEMA = {

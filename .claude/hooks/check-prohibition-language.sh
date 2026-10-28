@@ -8,8 +8,14 @@
 # Read stdin
 INPUT=$(cat)
 
-# Extract file_path (fail-open if jq is unavailable or parse fails)
-FILE_PATH=$(echo "$INPUT" | jq -r '.tool_input.file_path // ""' 2>/dev/null) || exit 0
+# Shared JSON reader (jq -> python3 -> plutil). A guard that cannot read its input blocks (exit 2).
+HOOK_JSON_LIB="$(dirname "$0")/lib/json.sh"
+[ -r "$HOOK_JSON_LIB" ] || { echo "BLOCKED by check-prohibition-language: $HOOK_JSON_LIB is missing; re-run install.sh" >&2; exit 2; }
+# shellcheck source=lib/json.sh
+. "$HOOK_JSON_LIB"
+hook_json_require check-prohibition-language
+
+FILE_PATH=$(hook_json_get "$INPUT" tool_input.file_path)
 
 if [ -z "$FILE_PATH" ]; then
   exit 0
@@ -22,12 +28,12 @@ case "$FILE_PATH" in
 esac
 
 # Extract content to check: new_string (Edit) or content (Write)
-TOOL_NAME=$(echo "$INPUT" | jq -r '.tool_name // ""' 2>/dev/null) || exit 0
+TOOL_NAME=$(hook_json_get "$INPUT" tool_name)
 
 if [ "$TOOL_NAME" = "Edit" ]; then
-  CONTENT=$(echo "$INPUT" | jq -r '.tool_input.new_string // ""' 2>/dev/null) || exit 0
+  CONTENT=$(hook_json_get "$INPUT" tool_input.new_string)
 elif [ "$TOOL_NAME" = "Write" ]; then
-  CONTENT=$(echo "$INPUT" | jq -r '.tool_input.content // ""' 2>/dev/null) || exit 0
+  CONTENT=$(hook_json_get "$INPUT" tool_input.content)
 else
   exit 0
 fi
@@ -37,7 +43,10 @@ if [ -z "$CONTENT" ]; then
 fi
 
 # Check for prohibition patterns
-if echo "$CONTENT" | grep -qE '禁止する|禁止とする|してはならない|してはいけない|することは禁止'; then
+# The **禁止:** label form is a list-bullet prohibition that the verb patterns miss.
+# (:|：) rather than [:：]: under the C locale (Git Bash's default) a bracket matches single
+# bytes, so the 3-byte full-width colon would never match.
+if printf '%s\n' "$CONTENT" | grep -qE '禁止する|禁止とする|してはならない|してはいけない|することは禁止|\*\*禁止(:|：)\*\*'; then
   cat >&2 <<'MSG'
 BLOCKED: 禁止表現が検出されました。肯定的な表現に書き換えてください。
 
