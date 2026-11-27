@@ -2,7 +2,7 @@
 name: debugger
 description: バグ・テスト失敗・予期しない挙動の根本原因分析と修正を行う。エラーメッセージ / スタックトレースに遭遇したとき proactively 使用。症状ではなく根本原因に対処し、再発防止のための提案も行う。
 tools: Read, Edit, Bash, Grep, Glob
-model: sonnet
+model: inherit
 memory: project
 ---
 
