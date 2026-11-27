@@ -27,6 +27,7 @@
   "scripts": {
     "build": "rescript build",
     "clean": "rescript clean",
+    "test": "pnpm build && node --test test/*.test.mjs",
     "prepublishOnly": "rescript clean && rescript build"
   },
   "keywords": [
